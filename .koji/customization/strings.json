@@ -1,13 +1,13 @@
 {
   "strings": {
     "fontFamily": "https://fonts.googleapis.com/css?family=Viga&display=swap",
-    "title": "p5js Multiplayer Scaffold",
-    "desktop_instructions1": "Just a scaffold, using koji-dispatch",
-    "desktop_instructions2": "Thanks to @Svarog",
-    "desktop_instructions3": "For his koji-dispatch boilerplate code",
-    "mobile_instructions1": "Just a scaffold",
-    "mobile_instructions2": "Thanks to @Svarog and @diddy",
-    "mobile_instructions3": "For their boilerplate code",
+    "title": "Arena Loon Shooter 🔥",
+    "desktop_instructions1": "Shoot your balloon to a matching loon!",
+    "desktop_instructions2": "Score points by shooting balloons or each other",
+    "desktop_instructions3": "Use WASD keys to move and Spacebar to shoot!",
+    "mobile_instructions1": "Shoot your balloon to a matching loon!",
+    "mobile_instructions2": "Score points by shooting balloons or each other",
+    "mobile_instructions3": "Touch to move and click shoot to shoot!",
     "defaultRoomName": "Koji",
     "defaultPlayerName": "Kumar Abhirup",
     "maxConnectionsPerShard": "2",
@@ -40,215 +40,218 @@
     ],
     "mainMenuBackgroundSize": ""
   },
-  "@@editor": [{
-    "key": "strings",
-    "name": "Game Settings",
-    "icon": "💡",
-    "source": "strings.json",
-    "fields": [{
-        "key": "fontFamily",
-        "name": "Font Family",
-        "description": "Google fonts link to font to use in the game",
-        "type": "text"
-      },
-      {
-        "key": "title",
-        "name": "Game Title",
-        "description": "The title that is displayed in the start menu",
-        "type": "text"
-      },
-      {
-        "key": "desktop_instructions1",
-        "name": "Desktop Game Instructions 1",
-        "type": "text"
-      },
-      {
-        "key": "desktop_instructions2",
-        "name": "Desktop Game Instructions 2",
-        "type": "text"
-      },
-      {
-        "key": "desktop_instructions3",
-        "name": "Desktop Game Instructions 3",
-        "type": "text"
-      },
-      {
-        "key": "mobile_instructions1",
-        "name": "Mobile Game Instructions 1",
-        "type": "text"
-      },
-      {
-        "key": "mobile_instructions2",
-        "name": "Mobile Game Instructions 2",
-        "type": "text"
-      },
-      {
-        "key": "mobile_instructions3",
-        "name": "Mobile Game Instructions 3",
-        "type": "text"
-      },
-      {
-        "key": "defaultRoomName",
-        "name": "Default Room Name",
-        "description": "Default room name that appears in the main menu.",
-        "type": "text"
-      },
-      {
-        "key": "defaultPlayerName",
-        "name": "Default Player Name",
-        "description": "Default player name that appears in the main menu.",
-        "type": "text"
-      },
-      {
-        "key": "maxConnectionsPerShard",
-        "name": "Max Connections per Shard",
-        "description": "Maximum possible number of players allowed to join one room.",
-        "type": "text"
-      },
-      {
-        "key": "lives",
-        "name": "Starting Lives",
-        "description": "How many lives you initially have",
-        "type": "text"
-      },
-      {
-        "key": "arenaSize",
-        "name": "Arena Size",
-        "description": "How big is the playable arena?",
-        "type": "range",
-        "typeOptions": {
-          "min": 500,
-          "max": 15000,
-          "step": 1
+  "@@editor": [
+    {
+      "key": "strings",
+      "name": "Game Settings",
+      "icon": "💡",
+      "source": "strings.json",
+      "fields": [
+        {
+          "key": "fontFamily",
+          "name": "Font Family",
+          "description": "Google fonts link to font to use in the game",
+          "type": "text"
+        },
+        {
+          "key": "title",
+          "name": "Game Title",
+          "description": "The title that is displayed in the start menu",
+          "type": "text"
+        },
+        {
+          "key": "desktop_instructions1",
+          "name": "Desktop Game Instructions 1",
+          "type": "text"
+        },
+        {
+          "key": "desktop_instructions2",
+          "name": "Desktop Game Instructions 2",
+          "type": "text"
+        },
+        {
+          "key": "desktop_instructions3",
+          "name": "Desktop Game Instructions 3",
+          "type": "text"
+        },
+        {
+          "key": "mobile_instructions1",
+          "name": "Mobile Game Instructions 1",
+          "type": "text"
+        },
+        {
+          "key": "mobile_instructions2",
+          "name": "Mobile Game Instructions 2",
+          "type": "text"
+        },
+        {
+          "key": "mobile_instructions3",
+          "name": "Mobile Game Instructions 3",
+          "type": "text"
+        },
+        {
+          "key": "defaultRoomName",
+          "name": "Default Room Name",
+          "description": "Default room name that appears in the main menu.",
+          "type": "text"
+        },
+        {
+          "key": "defaultPlayerName",
+          "name": "Default Player Name",
+          "description": "Default player name that appears in the main menu.",
+          "type": "text"
+        },
+        {
+          "key": "maxConnectionsPerShard",
+          "name": "Max Connections per Shard",
+          "description": "Maximum possible number of players allowed to join one room.",
+          "type": "text"
+        },
+        {
+          "key": "lives",
+          "name": "Starting Lives",
+          "description": "How many lives you initially have",
+          "type": "text"
+        },
+        {
+          "key": "arenaSize",
+          "name": "Arena Size",
+          "description": "How big is the playable arena?",
+          "type": "range",
+          "typeOptions": {
+            "min": 500,
+            "max": 15000,
+            "step": 1
+          }
+        },
+        {
+          "key": "minimumScoreToSave",
+          "name": "Minimum Score to Save",
+          "description": "Minimum score needed for user to save his/her name in Leaderboard.",
+          "type": "text"
+        },
+        {
+          "key": "maxGameMessages",
+          "name": "Maximum Game Messages",
+          "description": "Limit the number of game messages here.",
+          "type": "range",
+          "typeOptions": {
+            "min": 1,
+            "max": 50,
+            "step": 1
+          }
+        },
+        {
+          "key": "messageDuration",
+          "name": "Game Message Duration",
+          "description": "Duration of each message in seconds.",
+          "type": "range",
+          "typeOptions": {
+            "min": 0.1,
+            "max": 5,
+            "step": 0.1
+          }
+        },
+        {
+          "key": "emojis",
+          "name": "Emojis",
+          "description": "Include up to 5 emojis from https://getemoji.com/ for player communication!",
+          "type": "text[]",
+          "arrayOptions": {
+            "min": 0,
+            "max": 5
+          }
+        },
+        {
+          "key": "enableCursor",
+          "name": "Enable Cursor",
+          "description": "Do you want the game to have cursor when game starts?",
+          "type": "boolean"
+        },
+        {
+          "key": "enableTimer",
+          "name": "Enable Game Timer",
+          "description": "Disable if you don't want game to have a timer.",
+          "type": "boolean"
+        },
+        {
+          "key": "gameTimer",
+          "name": "Game Timer",
+          "description": "How many seconds before game should over?",
+          "type": "text"
+        },
+        {
+          "key": "playButtonText",
+          "name": "Play Button Text",
+          "description": "Label on the Play Button",
+          "type": "text"
+        },
+        {
+          "key": "leaderboardButtonText",
+          "name": "Leaderboard Button Text",
+          "description": "Label on the Leaderboard Button",
+          "type": "text"
+        },
+        {
+          "key": "changeCharacterText",
+          "name": "Change Character",
+          "description": "Label on the Change Character Button",
+          "type": "text"
+        },
+        {
+          "key": "endButtonText",
+          "name": "End Button Text",
+          "description": "Label on the End Button",
+          "type": "text"
+        },
+        {
+          "key": "gameOverText",
+          "name": "Game Over Text",
+          "type": "text"
+        },
+        {
+          "key": "gameStartedFloatingText",
+          "name": "Game Started Text",
+          "description": "The floating text that appears after game starts.",
+          "type": "text"
+        },
+        {
+          "key": "comboText",
+          "name": "Success Texts",
+          "description": "Appreiciating texts that appear after some success.",
+          "type": "text"
+        },
+        {
+          "key": "emailInputEnabled",
+          "name": "Enable E-Mail Input",
+          "description": "Enable/Disable E-Mail input while submitting score.",
+          "type": "boolean"
+        },
+        {
+          "key": "scoreText",
+          "name": "Score Text",
+          "description": "Default: 'Score:'",
+          "type": "text"
+        },
+        {
+          "key": "highscoreText",
+          "name": "High Score Text",
+          "description": "Default: 'High Score:'",
+          "type": "text"
+        },
+        {
+          "key": "highscoreGainedText",
+          "name": "High Score Gained Text",
+          "description": "When you get a new high score",
+          "type": "text"
+        },
+        {
+          "key": "mainMenuBackgroundSize",
+          "name": "Main Menu Background Size",
+          "description": "Empty for tiled background. Use CSS background-size properties only. Eg. cover",
+          "type": "text"
         }
-      },
-      {
-        "key": "minimumScoreToSave",
-        "name": "Minimum Score to Save",
-        "description": "Minimum score needed for user to save his/her name in Leaderboard.",
-        "type": "text"
-      },
-      {
-        "key": "maxGameMessages",
-        "name": "Maximum Game Messages",
-        "description": "Limit the number of game messages here.",
-        "type": "range",
-        "typeOptions": {
-          "min": 1,
-          "max": 50,
-          "step": 1
-        }
-      },
-      {
-        "key": "messageDuration",
-        "name": "Game Message Duration",
-        "description": "Duration of each message in seconds.",
-        "type": "range",
-        "typeOptions": {
-          "min": 0.1,
-          "max": 5,
-          "step": 0.1
-        }
-      },
-      {
-        "key": "emojis",
-        "name": "Emojis",
-        "description": "Include up to 5 emojis from https://getemoji.com/ for player communication!",
-        "type": "text[]",
-        "arrayOptions": {
-          "min": 0,
-          "max": 5
-        }
-      },
-      {
-        "key": "enableCursor",
-        "name": "Enable Cursor",
-        "description": "Do you want the game to have cursor when game starts?",
-        "type": "boolean"
-      },
-      {
-        "key": "enableTimer",
-        "name": "Enable Game Timer",
-        "description": "Disable if you don't want game to have a timer.",
-        "type": "boolean"
-      },
-      {
-        "key": "gameTimer",
-        "name": "Game Timer",
-        "description": "How many seconds before game should over?",
-        "type": "text"
-      },
-      {
-        "key": "playButtonText",
-        "name": "Play Button Text",
-        "description": "Label on the Play Button",
-        "type": "text"
-      },
-      {
-        "key": "leaderboardButtonText",
-        "name": "Leaderboard Button Text",
-        "description": "Label on the Leaderboard Button",
-        "type": "text"
-      },
-      {
-        "key": "changeCharacterText",
-        "name": "Change Character",
-        "description": "Label on the Change Character Button",
-        "type": "text"
-      },
-      {
-        "key": "endButtonText",
-        "name": "End Button Text",
-        "description": "Label on the End Button",
-        "type": "text"
-      },
-      {
-        "key": "gameOverText",
-        "name": "Game Over Text",
-        "type": "text"
-      },
-      {
-        "key": "gameStartedFloatingText",
-        "name": "Game Started Text",
-        "description": "The floating text that appears after game starts.",
-        "type": "text"
-      },
-      {
-        "key": "comboText",
-        "name": "Success Texts",
-        "description": "Appreiciating texts that appear after some success.",
-        "type": "text"
-      },
-      {
-        "key": "emailInputEnabled",
-        "name": "Enable E-Mail Input",
-        "description": "Enable/Disable E-Mail input while submitting score.",
-        "type": "boolean"
-      },
-      {
-        "key": "scoreText",
-        "name": "Score Text",
-        "description": "Default: 'Score:'",
-        "type": "text"
-      },
-      {
-        "key": "highscoreText",
-        "name": "High Score Text",
-        "description": "Default: 'High Score:'",
-        "type": "text"
-      },
-      {
-        "key": "highscoreGainedText",
-        "name": "High Score Gained Text",
-        "description": "When you get a new high score",
-        "type": "text"
-      },
-      {
-        "key": "mainMenuBackgroundSize",
-        "name": "Main Menu Background Size",
-        "description": "Empty for tiled background. Use CSS background-size properties only. Eg. cover",
-        "type": "text"
-      }
-    ]
-  }]
+      ]
+    }
+  ]
 }
