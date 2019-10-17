@@ -12,6 +12,7 @@
     "defaultPlayerName": "Kumar Abhirup",
     "maxConnectionsPerShard": "2",
     "lives": "3",
+    "arenaSize": 3000,
     "minimumScoreToSave": "1",
     "maxGameMessages": "10",
     "messageDuration": "2",
@@ -20,6 +21,7 @@
     "gameTimer": "90",
     "playButtonText": "PLAY NOW",
     "leaderboardButtonText": "LEADERBOARD",
+    "changeCharacterText": "CHANGE CHARACTER",
     "endButtonText": "END GAME",
     "gameOverText": "GAME OVER",
     "gameStartedFloatingText": "Game started!",
@@ -110,6 +112,17 @@
         "type": "text"
       },
       {
+        "key": "arenaSize",
+        "name": "Arena Size",
+        "description": "How big is the playable arena?",
+        "type": "range",
+        "typeOptions": {
+          "min": 500,
+          "max": 15000,
+          "step": 1
+        }
+      },
+      {
         "key": "minimumScoreToSave",
         "name": "Minimum Score to Save",
         "description": "Minimum score needed for user to save his/her name in Leaderboard.",
@@ -175,6 +188,12 @@
         "key": "leaderboardButtonText",
         "name": "Leaderboard Button Text",
         "description": "Label on the Leaderboard Button",
+        "type": "text"
+      },
+      {
+        "key": "changeCharacterText",
+        "name": "Change Character",
+        "description": "Label on the Change Character Button",
         "type": "text"
       },
       {
