@@ -10,6 +10,14 @@
 
 import React, { Component } from 'react'
 
+export function getFontFamily(ff) {
+  const start = ff.indexOf('family=')
+  if (start === -1) return 'sans-serif'
+  let end = ff.indexOf('&', start)
+  if (end === -1) end = undefined
+  return ff.slice(start + 7, end)
+}
+
 class MainMenu extends Component {
   background = Koji.config.images.background
     ? `url(${Koji.config.images.background})`
@@ -24,18 +32,11 @@ class MainMenu extends Component {
       font: 'Arial',
       playerName: Koji.config.strings.defaultPlayerName,
       roomName: Koji.config.strings.defaultRoomName,
+      chosenImage: '',
     }
   }
 
   componentDidMount() {
-    function getFontFamily(ff) {
-      const start = ff.indexOf('family=')
-      if (start === -1) return 'sans-serif'
-      let end = ff.indexOf('&', start)
-      if (end === -1) end = undefined
-      return ff.slice(start + 7, end)
-    }
-
     const link = document.createElement('link')
     link.href = Koji.config.strings.fontFamily
     link.rel = 'stylesheet'
@@ -44,7 +45,12 @@ class MainMenu extends Component {
     const newStr = newFont.replace('+', ' ')
     newFont = newStr
 
-    this.setState({ font: newFont })
+    let imageLink = Koji.config.images.player
+    if (localStorage.getItem('chosenImageLink')) {
+      imageLink = localStorage.getItem('chosenImageLink')
+    }
+
+    this.setState({ font: newFont, chosenImage: imageLink })
     document.body.style.fontFamily = newFont
 
     try {
@@ -157,6 +163,9 @@ class MainMenu extends Component {
           </div>
         </div>
 
+        <hr style={{ width: '75%', opacity: 0.15 }} />
+        <div style={{ clear: 'both' }} />
+
         <form className="main-menu-form" onSubmit={this.handleSubmit}>
           <div className="main-menu-input-wrapper">
             <div className="main-menu-field">
@@ -232,6 +241,32 @@ class MainMenu extends Component {
             {Koji.config.strings.playButtonText}
           </button>
         </form>
+
+        <div
+          className="change-character-wrapper"
+          style={{ borderColor: `${Koji.config.colors.buttonColor}` }}
+        >
+          <button
+            className="main-menu-button"
+            type="button"
+            onClick={this.openCharacterPicker}
+            style={{
+              backgroundColor: Koji.config.colors.buttonColor,
+              color: Koji.config.colors.buttonTextColor,
+              fontFamily: `${this.state.font}`,
+              margin: '0',
+              borderRadius: '0',
+            }}
+          >
+            {Koji.config.strings.changeCharacterText}
+          </button>
+
+          <img
+            src={this.state.chosenImage}
+            className="character-preview-img"
+            alt="Choosen Player"
+          />
+        </div>
 
         <button
           type="button"

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-use-before-define */
@@ -51,10 +52,14 @@ let score = 0
 
 // Data taken from Game Settings
 let comboTexts = []
+let arenaSize = 1000
 
 // Images
 let imgLife
 let imgBackground
+let imgArenaBackground
+let imgPlayer = []
+let imgPlayerIndex = 0
 
 // Audio
 let sndMusic
@@ -83,6 +88,7 @@ let canScore = false
 
 // Size stuff
 let objSize // Base size modifier of all objects, calculated based on screen size
+let baseSize = 20
 
 /**
  * @description Game size in tiles
@@ -126,7 +132,18 @@ function preload() {
     imgBackground = loadImage(Koji.config.images.backgroundInGame)
   }
 
+  // Load player images from VCC
+  for (let i = 0; i < Koji.config.images.player.length; i++) {
+    imgPlayer[i] = loadImage(Koji.config.images.player[i])
+  }
+
+  // Get Player Index
+  if (localStorage.getItem('chosenImageIndex')) {
+    imgPlayerIndex = localStorage.getItem('chosenImageIndex')
+  }
+
   // Load images
+  imgArenaBackground = loadImage(Koji.config.images.backgroundInArena)
   imgLife = loadImage(Koji.config.images.lifeIcon)
   soundImage = loadImage(Koji.config.images.soundImage)
   muteImage = loadImage(Koji.config.images.muteImage)
@@ -149,6 +166,7 @@ function preload() {
   scoreGain = parseInt(Koji.config.strings.scoreGain)
   startingLives = parseInt(Koji.config.strings.lives)
   comboTexts = Koji.config.strings.comboText.split(',')
+  arenaSize = Koji.config.strings.arenaSize
   startingGameTimer = parseInt(Koji.config.strings.gameTimer)
   lives = startingLives
 
@@ -166,18 +184,18 @@ function instantiate() {
 
   player = new Player(
     {
-      x: random(0, width),
-      y: random(0, height),
+      x: random(-arenaSize / 2, arenaSize / 2),
+      y: random(-arenaSize / 2, arenaSize / 2),
     },
-    { radius: 20 },
+    { radius: 30 },
     {
       shape: 'circle',
-      color: '#ffff00',
+      image: imgPlayer[imgPlayerIndex],
       id: dispatch.clientId,
       playerName: dispatch.userInfo.playerName,
+      movable: true,
     }
   )
-  player.id = dispatch.clientId
 
   // Instantiate Emojis
   for (let i = 0; i < Koji.config.strings.emojis.length; i++) {
@@ -299,11 +317,7 @@ function draw() {
   }
 
   // Draw background or a solid color
-  if (imgBackground) {
-    background(imgBackground)
-  } else {
-    background(Koji.config.colors.backgroundColor)
-  }
+  drawBackground()
 
   // Draw UI
   if (gameOver || gameBeginning) {
@@ -398,18 +412,18 @@ function removeEmptyEnemies() {
 function spawnEnemy(userId, playerName) {
   const toBePushedEnemy = new Player(
     {
-      x: random(0, width),
-      y: random(0, height),
+      x: random(-arenaSize / 2, arenaSize / 2),
+      y: random(-arenaSize / 2, arenaSize / 2),
     },
-    { radius: 20 },
+    { radius: 30 },
     {
       shape: 'circle',
-      color: '#ffffff',
+      image: imgPlayer[imgPlayerIndex],
       id: userId,
       playerName: playerName || 'Player',
+      movable: true,
     }
   )
-  toBePushedEnemy.id = userId
 
   enemies.push(toBePushedEnemy)
 }
@@ -552,10 +566,38 @@ function keyPressed() {
   if (keyCode === ESCAPE) {
     exit()
   }
+
+  // Player movement on desktop
+  if (player) {
+    if (keyCode === RIGHT_ARROW || key === 'd') {
+      player.moveDir.x = 1
+    } else if (keyCode === LEFT_ARROW || key === 'a') {
+      player.moveDir.x = -1
+    }
+    if (keyCode === DOWN_ARROW || key === 's') {
+      player.moveDir.y = 1
+    } else if (keyCode === UP_ARROW || key === 'w') {
+      player.moveDir.y = -1
+    }
+  }
 }
 
 function keyReleased() {
   if (!gameOver && !gameBeginning) {
+    if (player) {
+      if ((keyCode === RIGHT_ARROW || key === 'd') && player.moveDir.x === 1) {
+        player.moveDir.x = 0
+      }
+      if ((keyCode === LEFT_ARROW || key === 'a') && player.moveDir.x === -1) {
+        player.moveDir.x = 0
+      }
+      if ((keyCode === DOWN_ARROW || key === 's') && player.moveDir.y === 1) {
+        player.moveDir.y = 0
+      }
+      if ((keyCode === UP_ARROW || key === 'w') && player.moveDir.y === -1) {
+        player.moveDir.y = 0
+      }
+    }
   }
 }
 

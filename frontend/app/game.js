@@ -4,6 +4,14 @@
 
 // This function runs when the Game Screen is ON
 function gamePlay() {
+  // Draw game border
+  push()
+  strokeWeight(objSize * 0.5)
+  stroke(Koji.config.colors.gameBorderColor)
+  noFill()
+  rect(-arenaSize / 2, -arenaSize / 2, arenaSize, arenaSize)
+  pop()
+
   // Floating Text effects
   for (let i = 0; i < floatingTexts.length; i += 1) {
     floatingTexts[i].update()
@@ -33,6 +41,7 @@ function gamePlay() {
   camera.on()
 
   player.show()
+  player.update()
   player.showPlayerName()
 
   enemies.forEach(enemy => {

@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-const { Bodies } = Matter
+const { Bodies, World } = Matter
 
 /**
  * @class GameObject
@@ -24,6 +24,7 @@ class GameObject {
       color: { r: 0, g: 255, b: 255, a: 1 },
       rotate: true,
       movable: false,
+      movementVelocity: 5,
     } // shape can either be a circle or a rectangle
   ) {
     this.cordinates = cordinates
@@ -53,12 +54,46 @@ class GameObject {
     }
 
     // add body to some array or world -> World.add(world, this.body)
+    if (this.settings.shouldAddInWorld) World.add(world, this.body)
 
-    // If the body is movable, save it to this.body for mouse constraint to understand.
+    this.body.position = createVector(
+      this.body.position.x,
+      this.body.position.y
+    )
+  }
+
+  rotateStartAt = 0
+
+  moveDir = createVector(0, 0)
+
+  velocity = createVector(0, 0)
+
+  maxVelocity = 5 || this.settings.movementVelocity
+
+  move() {
     if (this.settings.movable) {
-      this.body.movable = true
-    } else {
-      this.body.movable = false
+      this.velocity.x = Smooth(
+        this.velocity.x,
+        this.moveDir.x * this.maxVelocity,
+        6
+      )
+
+      this.velocity.y = Smooth(
+        this.velocity.y,
+        this.moveDir.y * this.maxVelocity,
+        6
+      )
+
+      this.body.position.add(this.velocity)
+
+      if (isMobile) {
+        if (touching) {
+          const touch = createVector(camera.mouseX, camera.mouseY)
+          this.moveDir = p5.Vector.sub(touch, this.body.position).normalize()
+        } else {
+          this.moveDir = createVector(0, 0)
+        }
+      }
     }
   }
 
@@ -165,6 +200,7 @@ class GameObject {
       ? translate(this.settings.translateWithVector)
       : null
 
+    angleMode(DEGREES)
     this.settings.rotate ? rotate(angle) : null
 
     switch (this.settings.shape) {
@@ -219,8 +255,12 @@ class GameObject {
   }
 
   // Rotate the object
-  rotate(degrees = 0) {
-    this.body.angle = degrees
+  rotate(degrees, rotateSpeed = 0.1, mode = 'auto') {
+    const effectiveDegrees =
+      mode === 'degrees'
+        ? degrees
+        : (this.rotateStartAt = this.rotateStartAt + rotateSpeed)
+    this.body.angle = effectiveDegrees
   }
 
   // Use this for your destruction code -> eg. World.remove(world, this.body)
