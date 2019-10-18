@@ -22,8 +22,9 @@ function drawBackground() {
   for (let i = -cells / 2; i < cells / 2; i++) {
     for (let j = -cells / 2; j < cells / 2; j++) {
       push()
-      if (imgArenaBackground)
+      if (imgArenaBackground) {
         image(imgArenaBackground, i * bgSize, j * bgSize, bgSize, bgSize)
+      }
       pop()
     }
   }
