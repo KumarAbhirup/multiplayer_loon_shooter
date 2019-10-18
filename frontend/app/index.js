@@ -179,7 +179,10 @@ function preload() {
   }
 
   // Load images
-  imgArenaBackground = loadImage(Koji.config.images.backgroundInArena)
+  if (Koji.config.images.backgroundInArena !== '') {
+    imgArenaBackground = loadImage(Koji.config.images.backgroundInArena)
+  }
+
   imgLife = loadImage(Koji.config.images.lifeIcon)
   soundImage = loadImage(Koji.config.images.soundImage)
   muteImage = loadImage(Koji.config.images.muteImage)
