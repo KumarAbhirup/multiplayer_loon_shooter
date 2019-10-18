@@ -25,10 +25,15 @@ let particles = []
 // Game Objects (READ-ONLY)
 let player
 let enemies = []
+let bullets = []
+let explosions = []
 
 // Game Stuffs (READ-N-WRITE)
 let emojis = []
 let emojiCooldown = 0
+
+let usingKeyboard = false
+let holdingShoot = false
 
 // Koji-Dispatch specific
 let dispatch
@@ -51,15 +56,22 @@ let highScore
 let score = 0
 
 // Data taken from Game Settings
-let comboTexts = []
 let arenaSize = 1000
+let weaponSize = []
+let weaponDamage = []
+let weaponCooldown = []
 
 // Images
 let imgLife
 let imgBackground
 let imgArenaBackground
+
 let imgPlayer = []
 let imgPlayerIndex = 0
+let imgWeapon = []
+let imgBullet = []
+let imgExplosion
+let imgParticle = []
 
 // Audio
 let sndMusic
@@ -116,6 +128,10 @@ let touchStartY = 0
 let touchCurrentX = 0
 let touchCurrentY = 0
 
+// Misc
+let uuidv1
+let lastUpdate = []
+
 // Load assets
 function preload() {
   // Load font from google fonts link provided in game settings
@@ -135,6 +151,15 @@ function preload() {
   // Load player images from VCC
   for (let i = 0; i < Koji.config.images.player.length; i++) {
     imgPlayer[i] = loadImage(Koji.config.images.player[i])
+  }
+
+  // Load weapons and Bullets
+  for (let i = 0; i < Koji.config.weapons.weapon.length; i++) {
+    imgWeapon[i] = loadImage(Koji.config.weapons.weapon[i].sprite)
+    imgBullet[i] = loadImage(Koji.config.weapons.weapon[i].bulletSprite)
+    weaponSize[i] = Koji.config.weapons.weapon[i].size
+    weaponDamage[i] = Koji.config.weapons.weapon[i].damage
+    weaponCooldown[i] = Koji.config.weapons.weapon[i].shootCooldown
   }
 
   // Get Player Index
@@ -165,7 +190,6 @@ function preload() {
   // Load settings from Game Settings
   scoreGain = parseInt(Koji.config.strings.scoreGain)
   startingLives = parseInt(Koji.config.strings.lives)
-  comboTexts = Koji.config.strings.comboText.split(',')
   arenaSize = Koji.config.strings.arenaSize
   startingGameTimer = parseInt(Koji.config.strings.gameTimer)
   lives = startingLives

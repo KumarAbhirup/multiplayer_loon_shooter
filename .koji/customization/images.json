@@ -18,6 +18,11 @@
       "https://i.imgur.com/TBFniEa.png",
       "https://i.imgur.com/wRbKVI0.png"
     ],
+    "particle": [
+      "https://i.imgur.com/DP8PUw0.png",
+      "https://i.imgur.com/tXolNyg.png",
+      "https://i.imgur.com/BvjMhrH.png"
+    ],
     "explosion": "https://i.imgur.com/QT2LYN4.png"
   },
   "@@editor": [{
@@ -65,6 +70,15 @@
         "key": "player",
         "name": "Player",
         "description": "Ideal size 196x196 and a circular shape to ensure proper collisions.",
+        "type": "image[]",
+        "arrayOptions": {
+          "min": 1
+        }
+      },
+      {
+        "key": "particle",
+        "name": "Particle Images",
+        "description": "Ideal size - small.",
         "type": "image[]",
         "arrayOptions": {
           "min": 1

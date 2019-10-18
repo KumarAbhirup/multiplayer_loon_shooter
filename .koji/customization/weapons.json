@@ -1,0 +1,114 @@
+{
+  "weapons": {
+    "weapon": [{
+        "name": "REVOLVER",
+        "sprite": "https://i.imgur.com/CjXLAH0.png",
+        "sizeModifier": 1,
+        "damage": 30,
+        "shootCooldown": 0.55,
+        "size": 20,
+        "bulletSprite": "https://i.imgur.com/JhI2ToA.png",
+        "shootSound": "https://objects.koji-cdn.com/69f0c541-e04d-42cd-a46c-e3f24a0b9753/lkn9r-weaponshoot1.mp3"
+      },
+      {
+        "name": "SHOTGUN",
+        "sprite": "https://i.imgur.com/lio8UMu.png",
+        "sizeModifier": 2,
+        "damage": 80,
+        "shootCooldown": 1.1,
+        "size": 40,
+        "bulletSprite": "https://i.imgur.com/PedrMjY.png",
+        "shootSound": "https://objects.koji-cdn.com/69f0c541-e04d-42cd-a46c-e3f24a0b9753/psy0u-weaponshoot2.mp3"
+      },
+      {
+        "sprite": "https://i.imgur.com/xT4tV53.png",
+        "name": "ASSAULT RIFLE",
+        "sizeModifier": 2,
+        "damage": 20,
+        "shootCooldown": 0.25,
+        "size": 40,
+        "bulletSprite": "https://i.imgur.com/t0DKV8B.png",
+        "shootSound": "https://objects.koji-cdn.com/69f0c541-e04d-42cd-a46c-e3f24a0b9753/aevab-weaponShoot3.mp3"
+      },
+      {
+        "sprite": "https://i.imgur.com/2PU4xP3.png",
+        "bulletSprite": "https://i.imgur.com/Htg1MAE.png",
+        "size": 30,
+        "name": "LASERGUN",
+        "damage": 50,
+        "shootCooldown": 0.75,
+        "shootSound": "https://objects.koji-cdn.com/69f0c541-e04d-42cd-a46c-e3f24a0b9753/q6e26-laser4.mp3"
+      }
+    ]
+  },
+  "@@editor": [{
+    "key": "weapons",
+    "name": "Weapons",
+    "icon": "🔫",
+    "source": "weapons.json",
+    "fields": [{
+      "key": "weapon",
+      "name": "Weapons",
+      "description": "Weapons included in the game",
+      "type": "object<Weapon>[]",
+      "arrayOptions": {
+        "addItemLabel": "Add Weapon",
+        "min": 1
+      },
+      "typeOptions": {
+        "Weapon": {
+          "name": {
+            "name": "Weapon name",
+            "description": "The name of the weapon",
+            "type": "text"
+          },
+          "sprite": {
+            "name": "Weapon sprite",
+            "description": "Image to use for the weapon",
+            "type": "image"
+          },
+          "bulletSprite": {
+            "name": "Bullet sprite",
+            "description": "Image to use for the bullet of this weapon",
+            "type": "image"
+          },
+          "size": {
+            "name": "Size",
+            "type": "range",
+            "description": "Size of this weapon",
+            "typeOptions": {
+              "min": 2,
+              "max": 60,
+              "step": 1
+            }
+          },
+          "damage": {
+            "name": "Damage",
+            "type": "range",
+            "description": "Damage of this weapon",
+            "typeOptions": {
+              "min": 1,
+              "max": 100,
+              "step": 1
+            }
+          },
+          "shootCooldown": {
+            "name": "Shoot Cooldown",
+            "description": "In seconds",
+            "type": "range",
+            "typeOptions": {
+              "min": 0.05,
+              "max": 3,
+              "step": 0.05
+            }
+          },
+          "shootSound": {
+            "name": "Shoot Sound",
+            "description": "Sound when you pew pew",
+            "type": "sound"
+          }
+        }
+      }
+    }]
+  }]
+}

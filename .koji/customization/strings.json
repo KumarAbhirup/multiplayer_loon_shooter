@@ -17,19 +17,13 @@
     "maxGameMessages": "10",
     "messageDuration": "2",
     "enableCursor": true,
-    "enableTimer": false,
-    "gameTimer": "90",
+    "enableTimer": true,
+    "gameTimer": "3",
     "playButtonText": "PLAY NOW",
     "leaderboardButtonText": "LEADERBOARD",
     "changeCharacterText": "CHANGE CHARACTER",
-    "endButtonText": "END GAME",
     "gameOverText": "GAME OVER",
-    "gameStartedFloatingText": "Game started!",
-    "comboText": "AWESOME 👏, NEAT 👌, GREAT 👏, FANTASTIC 💌, WOW ❤️, AMAZING 😍",
     "emailInputEnabled": false,
-    "scoreText": "Score:",
-    "highscoreText": "High Score:",
-    "highscoreGainedText": "New High Score!",
     "trialTesting": false,
     "emojis": [
       "😃",
@@ -197,26 +191,8 @@
         "type": "text"
       },
       {
-        "key": "endButtonText",
-        "name": "End Button Text",
-        "description": "Label on the End Button",
-        "type": "text"
-      },
-      {
         "key": "gameOverText",
         "name": "Game Over Text",
-        "type": "text"
-      },
-      {
-        "key": "gameStartedFloatingText",
-        "name": "Game Started Text",
-        "description": "The floating text that appears after game starts.",
-        "type": "text"
-      },
-      {
-        "key": "comboText",
-        "name": "Success Texts",
-        "description": "Appreiciating texts that appear after some success.",
         "type": "text"
       },
       {
@@ -224,24 +200,6 @@
         "name": "Enable E-Mail Input",
         "description": "Enable/Disable E-Mail input while submitting score.",
         "type": "boolean"
-      },
-      {
-        "key": "scoreText",
-        "name": "Score Text",
-        "description": "Default: 'Score:'",
-        "type": "text"
-      },
-      {
-        "key": "highscoreText",
-        "name": "High Score Text",
-        "description": "Default: 'High Score:'",
-        "type": "text"
-      },
-      {
-        "key": "highscoreGainedText",
-        "name": "High Score Gained Text",
-        "description": "When you get a new high score",
-        "type": "text"
       },
       {
         "key": "mainMenuBackgroundSize",
