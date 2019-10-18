@@ -82,6 +82,8 @@ let sndEnemyHit
 let sndExplosion
 let sndLostLife
 
+let sndWeaponShoot = []
+
 let soundEnabled = true
 let canMute = true
 
@@ -160,6 +162,13 @@ function preload() {
     weaponSize[i] = Koji.config.weapons.weapon[i].size
     weaponDamage[i] = Koji.config.weapons.weapon[i].damage
     weaponCooldown[i] = Koji.config.weapons.weapon[i].shootCooldown
+
+    if (Koji.config.weapons.weapon[i].shootSound)
+      sndWeaponShoot[i] = loadSound(Koji.config.weapons.weapon[i].shootSound)
+  }
+
+  for (let i = 0; i < Koji.config.images.particle.length; i++) {
+    imgParticle[i] = loadImage(Koji.config.images.particle[i])
   }
 
   // Get Player Index
@@ -172,6 +181,8 @@ function preload() {
   imgLife = loadImage(Koji.config.images.lifeIcon)
   soundImage = loadImage(Koji.config.images.soundImage)
   muteImage = loadImage(Koji.config.images.muteImage)
+
+  imgExplosion = loadImage(Koji.config.images.explosion)
 
   /**
    * Load Sounds here
