@@ -429,6 +429,12 @@ function manageData() {
       score,
       lives,
     })
+
+    dispatch.emitEvent('balloon_update', {
+      id: generateId(30),
+      posX: 4,
+      posY: 4,
+    })
   } catch (error) {
     console.log(error)
   }

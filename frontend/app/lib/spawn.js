@@ -142,19 +142,18 @@ function spawnCollectible(type) {
 }
 
 // Spawn Balloons
-function spawnBalloons() {
+function spawnBalloons(type = null) {
   for (let x = -balloonDistance; x <= balloonDistance; x += balloonRadius) {
     for (let y = -balloonDistance; y <= balloonDistance; y += balloonRadius) {
+      const balloonType = Math.floor(random(0, imgBullet.length - 1))
       balloons.push(
         new Balloon(
-          {
-            x,
-            y,
-          },
+          { x, y },
           { radius: balloonRadius / 2 },
           {
             shape: 'circle',
-            image: random(imgBullet),
+            image: imgBullet[balloonType],
+            type: balloonType,
           }
         )
       )
