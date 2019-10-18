@@ -21,6 +21,7 @@
   touching
   p5
   camera
+  balloonBorder
 */
 
 class Player extends GameObject {
@@ -58,5 +59,14 @@ class Player extends GameObject {
     )
 
     // Avoid player get in circle
+    if (
+      this.didTouch(
+        { sizing: balloonBorder.sizing, body: balloonBorder.body },
+        'circle'
+      )
+    ) {
+      const oldVelocity = createVector(this.velocity.x, this.velocity.y)
+      this.velocity.add(createVector(-oldVelocity.x, -oldVelocity.y).mult(3))
+    }
   }
 }
