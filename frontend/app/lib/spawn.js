@@ -133,8 +133,8 @@ function spawnCollectible(type) {
 function spawnBalloons() {
   const balloonRadius = 50
 
-  for (let x = 0; x <= 300; x += balloonRadius) {
-    for (let y = 0; y <= 300; y += balloonRadius) {
+  for (let x = -200; x <= 200; x += balloonRadius) {
+    for (let y = -200; y <= 200; y += balloonRadius) {
       balloons.push(
         new Balloon(
           {
