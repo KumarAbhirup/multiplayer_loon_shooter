@@ -46,6 +46,9 @@
   rectMode
   stroke
   pop
+
+  balloonRadius
+  balloonDistance
 */
 
 // To draw the timer in the right place
@@ -139,9 +142,6 @@ function spawnCollectible(type) {
 }
 
 // Spawn Balloons
-const balloonRadius = 50
-const balloonDistance = 200
-
 function spawnBalloons() {
   for (let x = -balloonDistance; x <= balloonDistance; x += balloonRadius) {
     for (let y = -balloonDistance; y <= balloonDistance; y += balloonRadius) {

@@ -56,5 +56,7 @@ class Player extends GameObject {
       -arenaSize / 2,
       arenaSize / 2
     )
+
+    // Avoid player get in circle
   }
 }

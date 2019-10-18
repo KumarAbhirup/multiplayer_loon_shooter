@@ -63,6 +63,9 @@ let weaponSize = []
 let weaponDamage = []
 let weaponCooldown = []
 
+const balloonRadius = 50
+const balloonDistance = 200
+
 // Images
 let imgLife
 let imgBackground
