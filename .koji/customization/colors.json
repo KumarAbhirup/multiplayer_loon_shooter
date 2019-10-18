@@ -2,6 +2,7 @@
   "colors": {
     "backgroundColor": "#0a0a31",
     "gameBorderColor": "#ffffff",
+    "circleBorderColor": "#ffffff40",
     "textColor": "#ffffff",
     "playButtonTextColor": "#0a0a31",
     "playButtonColor": "#ffda5a",
@@ -34,6 +35,11 @@
       {
         "key": "gameBorderColor",
         "name": "Arena Border Color",
+        "type": "color"
+      },
+      {
+        "key": "circleBorderColor",
+        "name": "Balloon Border Color",
         "type": "color"
       },
       {

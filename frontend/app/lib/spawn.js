@@ -37,6 +37,15 @@
   balloons 
   Balloon
   imgBullet
+
+  push
+  rect
+  circle
+  strokeWeight
+  noFill
+  rectMode
+  stroke
+  pop
 */
 
 // To draw the timer in the right place
@@ -130,11 +139,12 @@ function spawnCollectible(type) {
 }
 
 // Spawn Balloons
-function spawnBalloons() {
-  const balloonRadius = 50
+const balloonRadius = 50
+const balloonDistance = 200
 
-  for (let x = -200; x <= 200; x += balloonRadius) {
-    for (let y = -200; y <= 200; y += balloonRadius) {
+function spawnBalloons() {
+  for (let x = -balloonDistance; x <= balloonDistance; x += balloonRadius) {
+    for (let y = -balloonDistance; y <= balloonDistance; y += balloonRadius) {
       balloons.push(
         new Balloon(
           {
@@ -150,4 +160,14 @@ function spawnBalloons() {
       )
     }
   }
+}
+
+// Spawn circle around balloon
+function spawnBalloonBorder() {
+  push()
+  strokeWeight(objSize * 0.1)
+  stroke(Koji.config.colors.circleBorderColor)
+  noFill()
+  circle(0, 0, balloonDistance * 3.2)
+  pop()
 }

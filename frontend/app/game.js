@@ -61,6 +61,8 @@ function gamePlay() {
     balloon.show()
   })
 
+  spawnBalloonBorder()
+
   for (let i = 0; i < explosions.length; i += 1) {
     explosions[i].update()
     explosions[i].render()
