@@ -683,6 +683,7 @@ function init() {
   enemies = []
   collectibles = []
   bullets = []
+  balloons = []
   users = []
 
   dispatch.disconnect()

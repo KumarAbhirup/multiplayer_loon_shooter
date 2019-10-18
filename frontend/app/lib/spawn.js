@@ -140,7 +140,7 @@ function spawnBalloons() {
       { radius: 30 },
       {
         shape: 'circle',
-        color: '#000000',
+        image: random(imgBullet),
       }
     )
   )
