@@ -57,6 +57,10 @@ function gamePlay() {
     enemy.showPlayerName()
   })
 
+  balloons.forEach(balloon => {
+    balloon.show()
+  })
+
   for (let i = 0; i < explosions.length; i += 1) {
     explosions[i].update()
     explosions[i].render()

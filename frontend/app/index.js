@@ -26,6 +26,7 @@ let particles = []
 let player
 let enemies = []
 let bullets = []
+let balloons = []
 let explosions = []
 let collectibles = []
 
@@ -241,6 +242,8 @@ function instantiate() {
 
     emojis[i] = new Emoji(x, y, emojiSize, Koji.config.strings.emojis[i])
   }
+
+  spawnBalloons()
 }
 
 // Setup your props

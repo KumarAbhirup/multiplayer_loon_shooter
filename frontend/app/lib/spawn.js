@@ -33,6 +33,10 @@
 
   collectibles
   Collectible
+
+  balloons 
+  Balloon
+  imgBullet
 */
 
 // To draw the timer in the right place
@@ -121,6 +125,23 @@ function spawnCollectible(type) {
       random(-arenaSize / 2, arenaSize / 2),
       random(-arenaSize / 2, arenaSize / 2),
       _type
+    )
+  )
+}
+
+// Spawn Balloons
+function spawnBalloons() {
+  balloons.push(
+    new Balloon(
+      {
+        x: 0,
+        y: 0,
+      },
+      { radius: 30 },
+      {
+        shape: 'circle',
+        color: '#000000',
+      }
     )
   )
 }
