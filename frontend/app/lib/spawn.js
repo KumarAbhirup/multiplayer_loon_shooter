@@ -161,13 +161,3 @@ function spawnBalloons() {
     }
   }
 }
-
-// Spawn circle around balloon
-function spawnBalloonBorder() {
-  push()
-  strokeWeight(objSize * 0.1)
-  stroke(Koji.config.colors.circleBorderColor)
-  noFill()
-  circle(0, 0, balloonDistance * 3.2)
-  pop()
-}

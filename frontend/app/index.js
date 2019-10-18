@@ -29,6 +29,7 @@ let bullets = []
 let balloons = []
 let explosions = []
 let collectibles = []
+let balloonBorder
 
 // Game Stuffs (READ-N-WRITE)
 let emojis = []
@@ -250,6 +251,20 @@ function instantiate() {
   }
 
   spawnBalloons()
+
+  balloonBorder = new GameObject(
+    {
+      x: 0,
+      y: 0,
+    },
+    { radius: balloonDistance * 1.65 },
+    {
+      shape: 'circle',
+      color: '#00000000',
+      strokeColor: Koji.config.colors.circleBorderColor,
+      strokeWeight: objSize * 0.1,
+    }
+  )
 }
 
 // Setup your props

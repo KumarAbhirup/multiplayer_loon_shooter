@@ -203,6 +203,11 @@ class GameObject {
     angleMode(DEGREES)
     this.settings.rotate ? rotate(angle) : null
 
+    if (this.settings.strokeColor) {
+      strokeWeight(this.settings.strokeWeight || 10)
+      stroke(this.settings.strokeColor)
+    }
+
     switch (this.settings.shape) {
       case 'circle':
         this.settings.image
