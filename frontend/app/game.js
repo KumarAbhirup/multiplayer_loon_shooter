@@ -26,6 +26,12 @@ function gamePlay() {
     }
   }
 
+  // Show bullets
+  for (let i = 0; i < bullets.length; i += 1) {
+    bullets[i].update()
+    bullets[i].render()
+  }
+
   if (emojiCooldown > 0) {
     emojiCooldown -= 1 / frameRate()
   }
@@ -40,14 +46,21 @@ function gamePlay() {
 
   camera.on()
 
-  player.show()
-  player.update()
-  player.showPlayerName()
+  if (player) {
+    player.show()
+    player.update()
+    player.showPlayerName()
+  }
 
   enemies.forEach(enemy => {
     enemy.show()
     enemy.showPlayerName()
   })
+
+  for (let i = 0; i < explosions.length; i += 1) {
+    explosions[i].update()
+    explosions[i].render()
+  }
 
   if (cameraTarget) {
     camera.position.x = Smooth(

@@ -27,6 +27,7 @@ let player
 let enemies = []
 let bullets = []
 let explosions = []
+let collectibles = []
 
 // Game Stuffs (READ-N-WRITE)
 let emojis = []
@@ -444,25 +445,6 @@ function removeEmptyEnemies() {
   }
 }
 
-function spawnEnemy(userId, playerName) {
-  const toBePushedEnemy = new Player(
-    {
-      x: random(-arenaSize / 2, arenaSize / 2),
-      y: random(-arenaSize / 2, arenaSize / 2),
-    },
-    { radius: 30 },
-    {
-      shape: 'circle',
-      image: imgPlayer[imgPlayerIndex],
-      id: userId,
-      playerName: playerName || 'Player',
-      movable: true,
-    }
-  )
-
-  enemies.push(toBePushedEnemy)
-}
-
 /**
  * Go through objects and see which ones need to be removed
  * A good practive would be for objects to have a boolean like removable, and here you would go through all objects and remove them if they have removable = true;
@@ -496,6 +478,27 @@ function cleanup() {
   for (let i = 0; i < enemies.length; i++) {
     if (enemies[i].removable) {
       enemies.splice(i, 1)
+    }
+  }
+
+  // Clean Explosions
+  for (let i = 0; i < explosions.length; i++) {
+    if (explosions[i].removable) {
+      explosions.splice(i, 1)
+    }
+  }
+
+  // Clean Collectibles
+  for (let i = 0; i < collectibles.length; i++) {
+    if (collectibles[i].removable) {
+      collectibles.splice(i, 1)
+    }
+  }
+
+  // Clean Bullets
+  for (let i = 0; i < bullets.length; i++) {
+    if (bullets[i].removable) {
+      bullets.splice(i, 1)
     }
   }
 }
@@ -538,6 +541,10 @@ function touchStarted() {
           break
         }
       }
+    }
+
+    if (!isMobile) {
+      usingKeyboard = false
     }
 
     if (canEnd) {
@@ -609,10 +616,17 @@ function keyPressed() {
     } else if (keyCode === LEFT_ARROW || key === 'a') {
       player.moveDir.x = -1
     }
+
     if (keyCode === DOWN_ARROW || key === 's') {
       player.moveDir.y = 1
     } else if (keyCode === UP_ARROW || key === 'w') {
       player.moveDir.y = -1
+    }
+
+    if (key === ' ') {
+      usingKeyboard = true
+      holdingShoot = true
+      // player.shoot()
     }
   }
 }
@@ -623,14 +637,21 @@ function keyReleased() {
       if ((keyCode === RIGHT_ARROW || key === 'd') && player.moveDir.x === 1) {
         player.moveDir.x = 0
       }
+
       if ((keyCode === LEFT_ARROW || key === 'a') && player.moveDir.x === -1) {
         player.moveDir.x = 0
       }
+
       if ((keyCode === DOWN_ARROW || key === 's') && player.moveDir.y === 1) {
         player.moveDir.y = 0
       }
+
       if ((keyCode === UP_ARROW || key === 'w') && player.moveDir.y === -1) {
         player.moveDir.y = 0
+      }
+
+      if (key === ' ') {
+        holdingShoot = false
       }
     }
   }
@@ -657,6 +678,8 @@ function init() {
   gameMessages = []
   emojis = []
   enemies = []
+  collectibles = []
+  bullets = []
   users = []
 
   dispatch.disconnect()

@@ -20,6 +20,19 @@
   width
   height
   Smooth
+
+  Player
+  arenaSize
+  random
+  enemies
+  imgPlayer
+  imgPlayerIndex
+
+  explosions
+  Explosion
+
+  collectibles
+  Collectible
 */
 
 // To draw the timer in the right place
@@ -68,4 +81,46 @@ function drawTimer() {
   textSize(timerSize)
   fill(Koji.config.colors.timerText)
   text(timerText, x, y)
+}
+
+// To spawn an enemy
+function spawnEnemy(userId, playerName) {
+  const toBePushedEnemy = new Player(
+    {
+      x: random(-arenaSize / 2, arenaSize / 2),
+      y: random(-arenaSize / 2, arenaSize / 2),
+    },
+    { radius: 30 },
+    {
+      shape: 'circle',
+      image: imgPlayer[imgPlayerIndex],
+      id: userId,
+      playerName: playerName || 'Player',
+      movable: true,
+    }
+  )
+
+  enemies.push(toBePushedEnemy)
+}
+
+// To spawn the explosion image
+function spawnExplosion(x, y, size) {
+  explosions.push(new Explosion(x, y, size))
+}
+
+// To spawn collectibles like guns
+function spawnCollectible(type) {
+  let _type = floor(random() * Koji.config.weapons.weapon.length)
+
+  if (type) {
+    _type = type
+  }
+
+  collectibles.push(
+    new Collectible(
+      random(-arenaSize / 2, arenaSize / 2),
+      random(-arenaSize / 2, arenaSize / 2),
+      _type
+    )
+  )
 }
