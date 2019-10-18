@@ -7,7 +7,7 @@
         "damage": 30,
         "shootCooldown": 0.55,
         "size": 20,
-        "bulletSprite": "https://i.imgur.com/JhI2ToA.png",
+        "bulletSprite": "https://i.ibb.co/6nHt99L/yellow.png",
         "shootSound": "https://objects.koji-cdn.com/69f0c541-e04d-42cd-a46c-e3f24a0b9753/lkn9r-weaponshoot1.mp3"
       },
       {
@@ -17,7 +17,7 @@
         "damage": 80,
         "shootCooldown": 1.1,
         "size": 40,
-        "bulletSprite": "https://i.imgur.com/PedrMjY.png",
+        "bulletSprite": "https://i.ibb.co/kS4m88J/green.png",
         "shootSound": "https://objects.koji-cdn.com/69f0c541-e04d-42cd-a46c-e3f24a0b9753/psy0u-weaponshoot2.mp3"
       },
       {
@@ -27,12 +27,12 @@
         "damage": 20,
         "shootCooldown": 0.25,
         "size": 40,
-        "bulletSprite": "https://i.imgur.com/t0DKV8B.png",
+        "bulletSprite": "https://i.ibb.co/SfjScwB/white.png",
         "shootSound": "https://objects.koji-cdn.com/69f0c541-e04d-42cd-a46c-e3f24a0b9753/aevab-weaponShoot3.mp3"
       },
       {
         "sprite": "https://i.imgur.com/2PU4xP3.png",
-        "bulletSprite": "https://i.imgur.com/Htg1MAE.png",
+        "bulletSprite": "https://i.ibb.co/JmCqGzS/blue.png",
         "size": 30,
         "name": "LASERGUN",
         "damage": 50,

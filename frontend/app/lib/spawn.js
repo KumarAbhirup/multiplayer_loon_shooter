@@ -131,17 +131,23 @@ function spawnCollectible(type) {
 
 // Spawn Balloons
 function spawnBalloons() {
-  balloons.push(
-    new Balloon(
-      {
-        x: 0,
-        y: 0,
-      },
-      { radius: 30 },
-      {
-        shape: 'circle',
-        image: random(imgBullet),
-      }
-    )
-  )
+  const balloonRadius = 50
+
+  for (let x = 0; x <= 300; x += balloonRadius) {
+    for (let y = 0; y <= 300; y += balloonRadius) {
+      balloons.push(
+        new Balloon(
+          {
+            x,
+            y,
+          },
+          { radius: balloonRadius / 2 },
+          {
+            shape: 'circle',
+            image: random(imgBullet),
+          }
+        )
+      )
+    }
+  }
 }

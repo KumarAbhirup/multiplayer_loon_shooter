@@ -297,232 +297,232 @@ class Emoji {
   }
 }
 
-// Weapon [Not used yet]
-class Weapon extends Entity {
-  constructor(x, y, type, owner) {
-    super(x, y)
-    this.type = type
-    this.img = imgWeapon[type]
-    this.size = 1
-    this.goalSize = weaponSize[type]
-    this.desiredPos = createVector(x, y)
-    this.owner = owner
-  }
+// // Weapon [Not used yet]
+// class Weapon extends Entity {
+//   constructor(x, y, type, owner) {
+//     super(x, y)
+//     this.type = type
+//     this.img = imgWeapon[type]
+//     this.size = 1
+//     this.goalSize = weaponSize[type]
+//     this.desiredPos = createVector(x, y)
+//     this.owner = owner
+//   }
 
-  update() {
-    this.scale.x = Smooth(this.scale.x, 1, 4)
-    this.scale.y = Smooth(this.scale.y, 1, 4)
+//   update() {
+//     this.scale.x = Smooth(this.scale.x, 1, 4)
+//     this.scale.y = Smooth(this.scale.y, 1, 4)
 
-    this.type = this.owner.weaponType
+//     this.type = this.owner.weaponType
 
-    this.img = imgWeapon[this.type]
-    this.goalSize = weaponSize[this.type]
-    this.size = Smooth(this.size, this.goalSize, 4)
+//     this.img = imgWeapon[this.type]
+//     this.goalSize = weaponSize[this.type]
+//     this.size = Smooth(this.size, this.goalSize, 4)
 
-    if (!this.owner.killed) {
-      this.scale.x = this.owner.scale.x
-      this.desiredPos = createVector(
-        this.owner.pos.x + (this.size / 2) * this.scale.x * 0.75,
-        this.owner.pos.y
-      )
+//     if (!this.owner.killed) {
+//       this.scale.x = this.owner.scale.x
+//       this.desiredPos = createVector(
+//         this.owner.pos.x + (this.size / 2) * this.scale.x * 0.75,
+//         this.owner.pos.y
+//       )
 
-      this.pos.x = Smooth(this.pos.x, this.desiredPos.x, 2)
-      this.pos.y = Smooth(this.pos.y, this.desiredPos.y, 2)
+//       this.pos.x = Smooth(this.pos.x, this.desiredPos.x, 2)
+//       this.pos.y = Smooth(this.pos.y, this.desiredPos.y, 2)
 
-      let dir = createVector(this.owner.shootDir.x, this.owner.shootDir.y)
+//       let dir = createVector(this.owner.shootDir.x, this.owner.shootDir.y)
 
-      if (isMobile || usingKeyboard) {
-        //
-      } else {
-        dir = createVector(
-          camera.mouseX - this.pos.x,
-          camera.mouseY - this.pos.y
-        ).normalize()
-      }
+//       if (isMobile || usingKeyboard) {
+//         //
+//       } else {
+//         dir = createVector(
+//           camera.mouseX - this.pos.x,
+//           camera.mouseY - this.pos.y
+//         ).normalize()
+//       }
 
-      let angleDir = dir.heading()
-      if (this.scale.x < 0) {
-        angleDir += Math.PI
-      }
+//       let angleDir = dir.heading()
+//       if (this.scale.x < 0) {
+//         angleDir += Math.PI
+//       }
 
-      if (this.owner === player) {
-        this.rotation = angleDir
-      }
-    }
-  }
-}
+//       if (this.owner === player) {
+//         this.rotation = angleDir
+//       }
+//     }
+//   }
+// }
 
-// Bullet with Weapon [Not used yet]
-class Bullet extends Moveable {
-  constructor(x, y, type, dir, owner) {
-    super(x, y)
-    this.type = type
-    this.img = imgBullet[type]
-    this.maxVelocity = Koji.config.strings.bulletSpeed
-    this.size = 0.1
-    this.goalSize = 20
-    this.damage = weaponDamage[type]
-    this.moveDir = createVector(dir.x, dir.y)
-    this.rotation = owner.weapon.rotation
-    this.scale.x = owner.weapon.scale.x
-    this.goalVelocity = this.maxVelocity / 4
-    this.owner = owner
+// // Bullet with Weapon [Not used yet]
+// class Bullet extends Moveable {
+//   constructor(x, y, type, dir, owner) {
+//     super(x, y)
+//     this.type = type
+//     this.img = imgBullet[type]
+//     this.maxVelocity = Koji.config.strings.bulletSpeed
+//     this.size = 0.1
+//     this.goalSize = 20
+//     this.damage = weaponDamage[type]
+//     this.moveDir = createVector(dir.x, dir.y)
+//     this.rotation = owner.weapon.rotation
+//     this.scale.x = owner.weapon.scale.x
+//     this.goalVelocity = this.maxVelocity / 4
+//     this.owner = owner
 
-    if (sndWeaponShoot[this.type]) sndWeaponShoot[this.type].play()
-  }
+//     if (sndWeaponShoot[this.type]) sndWeaponShoot[this.type].play()
+//   }
 
-  update() {
-    super.update()
+//   update() {
+//     super.update()
 
-    this.size = Smooth(this.size, this.goalSize, 2)
+//     this.size = Smooth(this.size, this.goalSize, 2)
 
-    // Slowly decelerate the bullet, this creates slightly more realistic behaviour
-    this.maxVelocity = Smooth(this.maxVelocity, this.goalVelocity, 20)
+//     // Slowly decelerate the bullet, this creates slightly more realistic behaviour
+//     this.maxVelocity = Smooth(this.maxVelocity, this.goalVelocity, 20)
 
-    if (this.checkEdges()) {
-      this.removable = true
-      spawnExplosion(this.pos.x, this.pos.y, random(35, 50))
-    }
+//     if (this.checkEdges()) {
+//       this.removable = true
+//       spawnExplosion(this.pos.x, this.pos.y, random(35, 50))
+//     }
 
-    for (let i = 0; i < bullets.length; i += 1) {
-      if (bullets[i] !== this) {
-        if (this.collisionWith(bullets[i])) {
-          this.removable = true
-          bullets[i].removable = true
+//     for (let i = 0; i < bullets.length; i += 1) {
+//       if (bullets[i] !== this) {
+//         if (this.collisionWith(bullets[i])) {
+//           this.removable = true
+//           bullets[i].removable = true
 
-          spawnExplosion(
-            (this.pos.x + bullets[i].pos.x) / 2,
-            (this.pos.y + bullets[i].pos.y) / 2,
-            random(35, 50)
-          )
-        }
-      }
-    }
-  }
+//           spawnExplosion(
+//             (this.pos.x + bullets[i].pos.x) / 2,
+//             (this.pos.y + bullets[i].pos.y) / 2,
+//             random(35, 50)
+//           )
+//         }
+//       }
+//     }
+//   }
 
-  checkEdges() {
-    if (
-      this.pos.x > arenaSize / 2 ||
-      this.pos.x < -arenaSize / 2 ||
-      this.pos.y > arenaSize / 2 ||
-      this.pos.y < -arenaSize / 2
-    ) {
-      return true
-    }
-    return false
-  }
-}
+//   checkEdges() {
+//     if (
+//       this.pos.x > arenaSize / 2 ||
+//       this.pos.x < -arenaSize / 2 ||
+//       this.pos.y > arenaSize / 2 ||
+//       this.pos.y < -arenaSize / 2
+//     ) {
+//       return true
+//     }
+//     return false
+//   }
+// }
 
-// Explosion
-class Explosion extends Entity {
-  constructor(x, y, size) {
-    super(x, y)
-    this.img = imgExplosion
-    this.size = 0.1
-    this.goalSize = size
-    this.rotation = random() * Math.PI
-    this.animTimer = 0
-  }
+// // Explosion
+// class Explosion extends Entity {
+//   constructor(x, y, size) {
+//     super(x, y)
+//     this.img = imgExplosion
+//     this.size = 0.1
+//     this.goalSize = size
+//     this.rotation = random() * Math.PI
+//     this.animTimer = 0
+//   }
 
-  update() {
-    // this.size = Smooth(this.size, this.maxSize, 4);
+//   update() {
+//     // this.size = Smooth(this.size, this.maxSize, 4);
 
-    const animSpeed = 4
-    this.animTimer += (1 / frameRate()) * animSpeed
+//     const animSpeed = 4
+//     this.animTimer += (1 / frameRate()) * animSpeed
 
-    // Get dat size bounce effects
-    this.size = EaseNew(
-      EasingFunctions.outBounce,
-      this.animTimer,
-      0,
-      this.goalSize,
-      animSpeed
-    )
+//     // Get dat size bounce effects
+//     this.size = EaseNew(
+//       EasingFunctions.outBounce,
+//       this.animTimer,
+//       0,
+//       this.goalSize,
+//       animSpeed
+//     )
 
-    if (this.animTimer >= 1) {
-      this.removable = true
-    }
-  }
-}
+//     if (this.animTimer >= 1) {
+//       this.removable = true
+//     }
+//   }
+// }
 
-// Weapons and other collectibles that spawn
-class Collectible extends Entity {
-  constructor(x, y, type) {
-    super(x, y)
+// // Weapons and other collectibles that spawn
+// class Collectible extends Entity {
+//   constructor(x, y, type) {
+//     super(x, y)
 
-    this.type = type
-    this.img = imgWeapon[this.type]
+//     this.type = type
+//     this.img = imgWeapon[this.type]
 
-    this.maxSize = weaponSize[this.type] * 0.75
-    this.size = 0
+//     this.maxSize = weaponSize[this.type] * 0.75
+//     this.size = 0
 
-    this.animTimer = 0
+//     this.animTimer = 0
 
-    this.collected = false
+//     this.collected = false
 
-    this.rotation = random(0, Math.PI)
+//     this.rotation = random(0, Math.PI)
 
-    this.velocity = createVector(0, 0)
-  }
+//     this.velocity = createVector(0, 0)
+//   }
 
-  update() {
-    let animSpeed = 4
+//   update() {
+//     let animSpeed = 4
 
-    if (this.collected) {
-      animSpeed = 8
-    }
+//     if (this.collected) {
+//       animSpeed = 8
+//     }
 
-    if (this.animTimer < 1) {
-      this.animTimer += (1 / frameRate()) * animSpeed
+//     if (this.animTimer < 1) {
+//       this.animTimer += (1 / frameRate()) * animSpeed
 
-      if (this.collected) {
-        this.size = Ease(
-          EasingFunctions.inBack,
-          this.animTimer,
-          this.maxSize,
-          -this.maxSize,
-          animSpeed
-        )
-      } else {
-        this.size = Ease(
-          EasingFunctions.outBack,
-          this.animTimer,
-          0,
-          this.maxSize,
-          animSpeed
-        )
-      }
-    }
+//       if (this.collected) {
+//         this.size = Ease(
+//           EasingFunctions.inBack,
+//           this.animTimer,
+//           this.maxSize,
+//           -this.maxSize,
+//           animSpeed
+//         )
+//       } else {
+//         this.size = Ease(
+//           EasingFunctions.outBack,
+//           this.animTimer,
+//           0,
+//           this.maxSize,
+//           animSpeed
+//         )
+//       }
+//     }
 
-    if (this.collected && this.animTimer >= 1) {
-      this.removable = true
-    }
+//     if (this.collected && this.animTimer >= 1) {
+//       this.removable = true
+//     }
 
-    this.velocity.x = Smooth(this.velocity.x, 0, 8)
-    this.velocity.y = Smooth(this.velocity.y, 0, 8)
+//     this.velocity.x = Smooth(this.velocity.x, 0, 8)
+//     this.velocity.y = Smooth(this.velocity.y, 0, 8)
 
-    this.pos.add(this.velocity)
-  }
+//     this.pos.add(this.velocity)
+//   }
 
-  isOffscreen() {
-    if (
-      abs(this.pos.x - camera.position.x) >
-        (width / 2) * (1 / camera.zoom) + this.size ||
-      abs(this.pos.y - camera.position.y) >
-        (height / 2) * (1 / camera.zoom) + this.size
-    ) {
-      return true
-    }
+//   isOffscreen() {
+//     if (
+//       abs(this.pos.x - camera.position.x) >
+//         (width / 2) * (1 / camera.zoom) + this.size ||
+//       abs(this.pos.y - camera.position.y) >
+//         (height / 2) * (1 / camera.zoom) + this.size
+//     ) {
+//       return true
+//     }
 
-    return false
-  }
+//     return false
+//   }
 
-  render() {
-    // Don't render if offscreen. Saves performance.
-    if (this.isOffscreen()) {
-      return
-    }
+//   render() {
+//     // Don't render if offscreen. Saves performance.
+//     if (this.isOffscreen()) {
+//       return
+//     }
 
-    super.render()
-  }
-}
+//     super.render()
+//   }
+// }
