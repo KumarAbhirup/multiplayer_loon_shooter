@@ -330,7 +330,7 @@ function setup() {
         enemy.score = payload.score
         enemy.lives = payload.lives
         enemy.name = payload.name
-        enemy.settings.image = payload.image
+        enemy.settings.image = imgPlayer[payload.imageIndex]
       }
     })
   })
@@ -435,7 +435,7 @@ function manageData() {
       name: dispatch.userInfo.playerName,
       posX: Math.floor(player.body.position.x),
       posY: Math.floor(player.body.position.y),
-      image: player.settings.image,
+      imageIndex: imgPlayerIndex,
       score,
       lives,
     })
