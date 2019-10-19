@@ -317,7 +317,7 @@ function setup() {
     // connectedClients is an object of the form { clientId: { userInfo } }
     users = data.connectedClients
 
-    users[0] = firstClientId
+    firstClientId = Object.keys(users)[0]
 
     handleNewConnection()
   })
@@ -457,7 +457,7 @@ function handleNewConnection() {
 
         if (dispatch.clientId === firstClientId) {
           spawnBalloons()
-          // dispatch.emitEvent('balloons_spawn', { balloons })
+          dispatch.emitEvent('balloons_spawn', { balloons })
         }
       }
     }
