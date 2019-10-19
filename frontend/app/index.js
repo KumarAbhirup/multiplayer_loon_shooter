@@ -457,7 +457,7 @@ function handleNewConnection() {
 
         if (dispatch.clientId === firstClientId) {
           spawnBalloons()
-          dispatch.emitEvent('balloons_spawn', { balloons })
+          // dispatch.emitEvent('balloons_spawn', { balloons })
         }
       }
     }
