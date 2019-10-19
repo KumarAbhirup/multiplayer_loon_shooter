@@ -52,8 +52,8 @@
       "description": "Weapons included in the game",
       "type": "object<Weapon>[]",
       "arrayOptions": {
-        "addItemLabel": "Add Weapon",
-        "min": 1
+        "min": 4,
+        "max": 4
       },
       "typeOptions": {
         "Weapon": {

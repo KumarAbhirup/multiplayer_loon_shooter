@@ -66,7 +66,6 @@ let weaponDamage = []
 let weaponCooldown = []
 
 const balloonRadius = 50
-const balloonDistance = 200
 
 // Images
 let imgLife
@@ -258,7 +257,7 @@ function instantiate() {
       x: 0,
       y: 0,
     },
-    { radius: balloonDistance * 1.65 },
+    { radius: (formation.length / 2) * balloonRadius * 1.5 },
     {
       shape: 'circle',
       color: '#00000000',
@@ -454,11 +453,8 @@ function handleNewConnection() {
     if (id !== dispatch.clientId) {
       if (!enemyIDs.includes(id) && users[id].playerName) {
         spawnEnemy(id, users[id].playerName)
-
-        if (dispatch.clientId === firstClientId) {
-          spawnBalloons()
-          dispatch.emitEvent('balloons_spawn', { balloons })
-        }
+        spawnBalloons()
+        dispatch.emitEvent('balloons_spawn', { balloons })
       }
     }
   }

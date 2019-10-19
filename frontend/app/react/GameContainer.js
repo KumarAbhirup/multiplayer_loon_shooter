@@ -31,6 +31,7 @@ class GameContainer extends Component {
     require('script-loader!app/lib/utilities.js')
     require('script-loader!app/lib/spawn.js')
     require('script-loader!app/lib/entities.js')
+    require('script-loader!app/lib/formations.js')
 
     let roomName = Koji.config.strings.defaultRoomName
     if (localStorage.getItem('roomName')) {

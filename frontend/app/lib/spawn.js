@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 /* eslint-disable no-global-assign */
 /* eslint-disable no-unused-vars */
 
@@ -49,6 +50,7 @@
 
   balloonRadius
   balloonDistance
+  formation
 */
 
 // To draw the timer in the right place
@@ -142,13 +144,19 @@ function spawnCollectible(type) {
 }
 
 // Spawn Balloons
-function spawnBalloons(type = null) {
-  for (let x = -balloonDistance; x <= balloonDistance; x += balloonRadius) {
-    for (let y = -balloonDistance; y <= balloonDistance; y += balloonRadius) {
-      const balloonType = Math.floor(random(0, imgBullet.length - 1))
+function spawnBalloons(_type = null) {
+  const noOfBalloonsInARow = formation.length
+
+  formation.forEach((row, i) => {
+    row.forEach((_balloon, j) => {
+      const balloonType = formation[j][i]
+
       balloons.push(
         new Balloon(
-          { x, y },
+          {
+            x: 0 + balloonRadius * (i - (noOfBalloonsInARow - 1) / 2),
+            y: 0 + balloonRadius * (j - (noOfBalloonsInARow - 1) / 2),
+          },
           { radius: balloonRadius / 2 },
           {
             shape: 'circle',
@@ -157,6 +165,6 @@ function spawnBalloons(type = null) {
           }
         )
       )
-    }
-  }
+    })
+  })
 }
