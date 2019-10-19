@@ -17,6 +17,7 @@ let gameStart = false // Becomes true after a moment when game initializes
 let canEnd = false
 
 let users = []
+let firstClientId = null // Client whose balloons are spawned everywhere
 
 // Effects
 let floatingTexts = []
@@ -250,7 +251,7 @@ function instantiate() {
     emojis[i] = new Emoji(x, y, emojiSize, Koji.config.strings.emojis[i])
   }
 
-  spawnBalloons()
+  // spawnBalloons()
 
   balloonBorder = new GameObject(
     {
@@ -315,6 +316,9 @@ function setup() {
   dispatch.on(dispatchEvent.CONNECTED_CLIENTS_CHANGED, data => {
     // connectedClients is an object of the form { clientId: { userInfo } }
     users = data.connectedClients
+
+    users[0] = firstClientId
+
     handleNewConnection()
   })
 
@@ -329,6 +333,11 @@ function setup() {
         enemy.name = payload.name
       }
     })
+  })
+
+  // Balloons Spawn
+  dispatch.on('balloons_spawn', payload => {
+    balloons = payload.balloons
   })
 
   // Chat listeners
@@ -429,12 +438,6 @@ function manageData() {
       score,
       lives,
     })
-
-    dispatch.emitEvent('balloon_update', {
-      id: generateId(30),
-      posX: 4,
-      posY: 4,
-    })
   } catch (error) {
     console.log(error)
   }
@@ -451,6 +454,11 @@ function handleNewConnection() {
     if (id !== dispatch.clientId) {
       if (!enemyIDs.includes(id) && users[id].playerName) {
         spawnEnemy(id, users[id].playerName)
+
+        if (dispatch.clientId === firstClientId) {
+          spawnBalloons()
+          dispatch.emitEvent('balloons_spawn', { balloons })
+        }
       }
     }
   }
