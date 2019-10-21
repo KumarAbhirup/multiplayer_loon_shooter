@@ -413,37 +413,37 @@ class Emoji {
 //   }
 // }
 
-// // Explosion
-// class Explosion extends Entity {
-//   constructor(x, y, size) {
-//     super(x, y)
-//     this.img = imgExplosion
-//     this.size = 0.1
-//     this.goalSize = size
-//     this.rotation = random() * Math.PI
-//     this.animTimer = 0
-//   }
+// Explosion
+class Explosion extends Entity {
+  constructor(x, y, size) {
+    super(x, y)
+    this.img = imgExplosion
+    this.size = 0.1
+    this.goalSize = size
+    this.rotation = random() * Math.PI
+    this.animTimer = 0
+  }
 
-//   update() {
-//     // this.size = Smooth(this.size, this.maxSize, 4);
+  update() {
+    // this.size = Smooth(this.size, this.maxSize, 4);
 
-//     const animSpeed = 4
-//     this.animTimer += (1 / frameRate()) * animSpeed
+    const animSpeed = 4
+    this.animTimer += (1 / frameRate()) * animSpeed
 
-//     // Get dat size bounce effects
-//     this.size = EaseNew(
-//       EasingFunctions.outBounce,
-//       this.animTimer,
-//       0,
-//       this.goalSize,
-//       animSpeed
-//     )
+    // Get dat size bounce effects
+    this.size = EaseNew(
+      EasingFunctions.outBounce,
+      this.animTimer,
+      0,
+      this.goalSize,
+      animSpeed
+    )
 
-//     if (this.animTimer >= 1) {
-//       this.removable = true
-//     }
-//   }
-// }
+    if (this.animTimer >= 1) {
+      this.removable = true
+    }
+  }
+}
 
 // // Weapons and other collectibles that spawn
 // class Collectible extends Entity {
