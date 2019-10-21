@@ -45,7 +45,7 @@ class Bullet extends GameObject {
       spawnExplosion(this.body.position.x, this.body.position.y, random(2, 10))
     }
 
-    // this.checkBulletCollision()
+    this.checkBulletCollision()
   }
 
   checkBulletCollision() {
