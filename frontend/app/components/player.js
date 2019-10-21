@@ -31,6 +31,8 @@
   imgBullet
   weaponCooldown
   balloonRadius
+  collectibles
+  users
 */
 
 class Player extends GameObject {
@@ -76,6 +78,54 @@ class Player extends GameObject {
     this.weapon.update()
   }
 
+  collectCollectible() {
+    for (let i = 0; i < collectibles.length; i += 1) {
+      if (
+        this.didTouch(
+          {
+            sizing: {
+              radius: collectibles[i].sizeMod * 2,
+            },
+            body: {
+              position: {
+                x: collectibles[i].pos.x,
+                y: collectibles[i].pos.y,
+              },
+            },
+          },
+          'circle'
+        ) &&
+        !collectibles[i].collected
+      ) {
+        const numOfPlayers = Object.keys(users).length
+
+        if (numOfPlayers > 1) {
+          // Collect
+          collectibles[i].collected = true
+          collectibles[i].animTimer = 0
+
+          this.weaponType = collectibles[i].type
+
+          break
+        } else {
+          // Bounce off the player
+          const dir = p5.Vector.sub(
+            collectibles[i].pos,
+            this.body.position
+          ).normalize()
+
+          const distance =
+            (1 / this.body.position.dist(collectibles[i].pos)) * 200
+
+          collectibles[i].velocity = createVector(
+            dir.x * distance * 2,
+            dir.y * distance * 2
+          )
+        }
+      }
+    }
+  }
+
   update() {
     this.weaponCooldownTimer -= 1 / 60
 
@@ -112,6 +162,8 @@ class Player extends GameObject {
     if (touching || holdingShoot) {
       this.shoot()
     }
+
+    this.collectCollectible()
   }
 
   shoot() {
