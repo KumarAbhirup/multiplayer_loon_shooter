@@ -238,6 +238,7 @@ function instantiate() {
       id: dispatch.clientId,
       playerName: dispatch.userInfo.playerName,
       movable: true,
+      weaponType: Math.floor(random(0, 3)),
     }
   )
 
@@ -249,8 +250,6 @@ function instantiate() {
 
     emojis[i] = new Emoji(x, y, emojiSize, Koji.config.strings.emojis[i])
   }
-
-  // spawnBalloons()
 
   balloonBorder = new GameObject(
     {
@@ -455,6 +454,7 @@ function handleNewConnection() {
     if (id !== dispatch.clientId) {
       if (!enemyIDs.includes(id) && users[id].playerName) {
         spawnEnemy(id, users[id].playerName)
+
         spawnBalloons()
         dispatch.emitEvent('balloons_spawn', { balloons })
       }
