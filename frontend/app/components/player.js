@@ -54,6 +54,7 @@ class Player extends GameObject {
       rotate: true,
       movable: true,
       owner: this,
+      type: this.weaponType,
     }
   )
 
@@ -105,6 +106,8 @@ class Player extends GameObject {
           collectibles[i].animTimer = 0
 
           this.weaponType = collectibles[i].type
+          this.weapon.type = collectibles[i].type
+          this.weapon.settings.image = imgWeapon[collectibles[i].type]
 
           break
         } else {

@@ -14,7 +14,7 @@
     "lives": "3",
     "arenaSize": 3000,
     "bulletSpeed": 18,
-    "maxCollectibles": 15,
+    "maxCollectibles": 22,
     "minimumScoreToSave": "1",
     "maxGameMessages": "10",
     "messageDuration": "2",
