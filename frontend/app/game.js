@@ -26,10 +26,10 @@ function gamePlay() {
     }
   }
 
+  manageCollectibles()
+
   // Show bullets
   for (let i = 0; i < bullets.length; i += 1) {
-    // bullets[i].update()
-    // bullets[i].render()
     bullets[i].show()
     bullets[i].fire()
   }
@@ -68,6 +68,11 @@ function gamePlay() {
   for (let i = 0; i < explosions.length; i += 1) {
     explosions[i].update()
     explosions[i].render()
+  }
+
+  for (let i = 0; i < collectibles.length; i += 1) {
+    collectibles[i].update()
+    collectibles[i].render()
   }
 
   if (cameraTarget) {
@@ -190,4 +195,10 @@ function updateGameStatus() {
   textAlign(RIGHT, TOP)
   text(scoreText, x, y * 1.3)
   pop()
+}
+
+function manageCollectibles() {
+  if (collectibles.length < maxCollectibles) {
+    spawnCollectible()
+  }
 }

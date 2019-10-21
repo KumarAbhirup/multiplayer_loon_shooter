@@ -61,6 +61,7 @@ let score = 0
 
 // Data taken from Game Settings
 let arenaSize = 1000
+let maxCollectibles = 200
 let weaponSize = []
 let weaponDamage = []
 let weaponCooldown = []
@@ -212,6 +213,7 @@ function preload() {
   startingLives = parseInt(Koji.config.strings.lives)
   arenaSize = Koji.config.strings.arenaSize
   startingGameTimer = parseInt(Koji.config.strings.gameTimer)
+  maxCollectibles = Koji.config.strings.maxCollectibles
   lives = startingLives
 
   // Timer stuff

@@ -443,84 +443,84 @@ class Explosion extends Entity {
   }
 }
 
-// // Weapons and other collectibles that spawn
-// class Collectible extends Entity {
-//   constructor(x, y, type) {
-//     super(x, y)
+// Weapons and other collectibles that spawn
+class Collectible extends Entity {
+  constructor(x, y, type) {
+    super(x, y)
 
-//     this.type = type
-//     this.img = imgWeapon[this.type]
+    this.type = type
+    this.img = imgWeapon[this.type]
 
-//     this.maxSize = weaponSize[this.type] * 0.75
-//     this.size = 0
+    this.maxSize = weaponSize[this.type] * 0.075
+    this.sizeMod = 0
 
-//     this.animTimer = 0
+    this.animTimer = 0
 
-//     this.collected = false
+    this.collected = false
 
-//     this.rotation = random(0, Math.PI)
+    this.rotation = random(0, Math.PI)
 
-//     this.velocity = createVector(0, 0)
-//   }
+    this.velocity = createVector(0, 0)
+  }
 
-//   update() {
-//     let animSpeed = 4
+  update() {
+    let animSpeed = 4
 
-//     if (this.collected) {
-//       animSpeed = 8
-//     }
+    if (this.collected) {
+      animSpeed = 8
+    }
 
-//     if (this.animTimer < 1) {
-//       this.animTimer += (1 / frameRate()) * animSpeed
+    if (this.animTimer < 1) {
+      this.animTimer += (1 / frameRate()) * animSpeed
 
-//       if (this.collected) {
-//         this.size = Ease(
-//           EasingFunctions.inBack,
-//           this.animTimer,
-//           this.maxSize,
-//           -this.maxSize,
-//           animSpeed
-//         )
-//       } else {
-//         this.size = Ease(
-//           EasingFunctions.outBack,
-//           this.animTimer,
-//           0,
-//           this.maxSize,
-//           animSpeed
-//         )
-//       }
-//     }
+      if (this.collected) {
+        this.sizeMod = EaseNew(
+          EasingFunctions.inBack,
+          this.animTimer,
+          this.maxSize,
+          -this.maxSize,
+          animSpeed
+        )
+      } else {
+        this.sizeMod = EaseNew(
+          EasingFunctions.outBack,
+          this.animTimer,
+          0,
+          this.maxSize,
+          animSpeed
+        )
+      }
+    }
 
-//     if (this.collected && this.animTimer >= 1) {
-//       this.removable = true
-//     }
+    if (this.collected && this.animTimer >= 1) {
+      this.removable = true
+    }
 
-//     this.velocity.x = Smooth(this.velocity.x, 0, 8)
-//     this.velocity.y = Smooth(this.velocity.y, 0, 8)
+    this.velocity.x = Smooth(this.velocity.x, 0, 8)
+    this.velocity.y = Smooth(this.velocity.y, 0, 8)
 
-//     this.pos.add(this.velocity)
-//   }
+    this.pos.add(this.velocity)
+  }
 
-//   isOffscreen() {
-//     if (
-//       abs(this.pos.x - camera.position.x) >
-//         (width / 2) * (1 / camera.zoom) + this.size ||
-//       abs(this.pos.y - camera.position.y) >
-//         (height / 2) * (1 / camera.zoom) + this.size
-//     ) {
-//       return true
-//     }
+  isOffscreen() {
+    if (
+      abs(this.pos.x - camera.position.x) >
+        (width / 2) * (1 / camera.zoom) + this.size ||
+      abs(this.pos.y - camera.position.y) >
+        (height / 2) * (1 / camera.zoom) + this.size
+    ) {
+      return true
+    }
 
-//     return false
-//   }
+    return false
+  }
 
-//   render() {
-//     // Don't render if offscreen. Saves performance.
-//     if (this.isOffscreen()) {
-//       return
-//     }
+  render() {
+    // Don't render if offscreen. Saves performance.
+    if (this.isOffscreen()) {
+      return
+    }
 
-//     super.render()
-//   }
-// }
+    super.render()
+  }
+}
