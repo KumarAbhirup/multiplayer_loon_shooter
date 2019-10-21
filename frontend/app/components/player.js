@@ -202,22 +202,26 @@ class Player extends GameObject {
       )
 
       // Spawn a bullet
-      const bullet = new Bullet(
-        { x: position.x, y: position.y },
-        { radius: balloonRadius / 2 },
-        {
-          shape: 'circle',
-          image: imgBullet[this.weaponType],
-          weapon: this.weapon,
-          owner: this,
-        }
-      )
+      const numOfPlayers = Object.keys(users).length
 
-      bullet.rotation = this.shootDir.heading()
+      if (numOfPlayers > 1) {
+        const bullet = new Bullet(
+          { x: position.x, y: position.y },
+          { radius: balloonRadius / 2 },
+          {
+            shape: 'circle',
+            image: imgBullet[this.weaponType],
+            weapon: this.weapon,
+            owner: this,
+          }
+        )
 
-      bullet.rotation = this.shootDir.heading() + Math.PI
+        bullet.rotation = this.shootDir.heading()
 
-      bullets.push(bullet)
+        bullet.rotation = this.shootDir.heading() + Math.PI
+
+        bullets.push(bullet)
+      }
 
       this.weaponCooldownTimer = weaponCooldown[this.weaponType]
     }
