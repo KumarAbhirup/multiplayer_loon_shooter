@@ -16,10 +16,13 @@
   spawnExplosion
   random
   bullets
+  p5
 */
 
 class Bullet extends GameObject {
   fromWeapon = this.settings.weapon
+
+  direction = this.fromWeapon.shootDirection
 
   owner = this.fromWeapon.owner
 
@@ -33,6 +36,9 @@ class Bullet extends GameObject {
     this.body.angle = this.rotation
 
     this.maxVelocity = Smooth(this.maxVelocity, this.goalVelocity, 20)
+
+    // Movement
+    this.body.position.add(p5.Vector.mult(this.direction, this.sizing.radius))
 
     if (this.isTouchingEdges()) {
       this.removable = true

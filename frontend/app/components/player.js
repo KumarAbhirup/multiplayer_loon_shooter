@@ -120,7 +120,7 @@ class Player extends GameObject {
       this.body.position.y
     )
 
-    position.add(p5.Vector.mult(this.shootDir, this.sizing.radius))
+    position.add(p5.Vector.mult(this.weapon.shootDirection, this.sizing.radius))
 
     // Pushback weapon
     const weaponPushbackDir = createVector(
