@@ -25,6 +25,10 @@
   balloonBorder
   Weapon
   imgWeapon
+  holdingShoot
+  bullets
+  Bullet
+  imgBullet
 */
 
 class Player extends GameObject {
@@ -97,5 +101,58 @@ class Player extends GameObject {
 
     // Weapon
     this.showWeapon()
+
+    // Shoot
+    if (touching || holdingShoot) {
+      this.shoot()
+    }
+  }
+
+  shoot() {
+    // Shoot in mouse direction
+    this.shootDir = createVector(
+      camera.mouseX - this.body.position.x,
+      camera.mouseY - this.body.position.y
+    )
+
+    const position = createVector(
+      this.body.position.x + this.sizing.radius * 0.75,
+      this.body.position.y
+    )
+
+    position.add(p5.Vector.mult(this.shootDir, this.sizing.radius))
+
+    // Pushback weapon
+    const weaponPushbackDir = createVector(
+      position.x - this.weapon.body.position.x,
+      position.y - this.weapon.body.position.y
+    )
+
+    const pushbackStrength = this.sizing.radius
+
+    weaponPushbackDir.normalize().mult(pushbackStrength)
+
+    this.weapon.body.position = createVector(
+      this.weapon.desiredPos.x - weaponPushbackDir.x,
+      this.weapon.desiredPos.y - weaponPushbackDir.y
+    )
+
+    // Spawn a bullet
+    const bullet = new Bullet(
+      { x: position.x, y: position.y },
+      { radius: 10 },
+      {
+        shape: 'circle',
+        image: imgBullet[this.weaponType],
+        weapon: this.weapon,
+        owner: this,
+      }
+    )
+
+    bullet.rotation = this.shootDir.heading()
+
+    bullet.rotation = this.shootDir.heading() + Math.PI
+
+    bullets.push(bullet)
   }
 }

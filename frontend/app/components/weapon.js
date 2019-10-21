@@ -17,7 +17,7 @@
 class Weapon extends GameObject {
   owner = this.settings.owner
 
-  weaponType = this.owner.weaponType
+  type = this.owner.weaponType
 
   shootDirection = createVector(0, 0)
 

@@ -30,6 +30,7 @@ function gamePlay() {
   for (let i = 0; i < bullets.length; i += 1) {
     // bullets[i].update()
     // bullets[i].render()
+    bullets[i].show()
     bullets[i].fire()
   }
 
