@@ -42,7 +42,7 @@ class Bullet extends GameObject {
 
     if (this.isTouchingEdges()) {
       this.removable = true
-      spawnExplosion(this.body.position.x, this.body.position.y, random(35, 50))
+      spawnExplosion(this.body.position.x, this.body.position.y, random(2, 10))
     }
 
     // this.checkBulletCollision()

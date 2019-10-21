@@ -418,20 +418,18 @@ class Explosion extends Entity {
   constructor(x, y, size) {
     super(x, y)
     this.img = imgExplosion
-    this.size = 0.1
+    this.sizeMod = 2
     this.goalSize = size
     this.rotation = random() * Math.PI
     this.animTimer = 0
   }
 
   update() {
-    // this.size = Smooth(this.size, this.maxSize, 4);
-
     const animSpeed = 4
     this.animTimer += (1 / frameRate()) * animSpeed
 
     // Get dat size bounce effects
-    this.size = EaseNew(
+    this.sizeMod = EaseNew(
       EasingFunctions.outBounce,
       this.animTimer,
       0,

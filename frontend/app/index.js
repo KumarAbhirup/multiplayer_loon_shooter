@@ -711,6 +711,7 @@ function init() {
 
   floatingTexts = []
   particles = []
+  explosions = []
   gameMessages = []
   emojis = []
   enemies = []
