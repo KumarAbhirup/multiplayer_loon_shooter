@@ -65,9 +65,7 @@ class Player extends GameObject {
 
   showWeapon() {
     this.weapon.show()
-
-    this.weapon.body.position.x = this.body.position.x + this.sizing.radius + 15
-    this.weapon.body.position.y = this.body.position.y
+    this.weapon.update()
   }
 
   update() {
@@ -79,6 +77,7 @@ class Player extends GameObject {
       -arenaSize / 2,
       arenaSize / 2
     )
+
     this.body.position.y = constrain(
       this.body.position.y,
       -arenaSize / 2,
