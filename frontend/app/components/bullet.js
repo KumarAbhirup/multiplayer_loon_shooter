@@ -22,6 +22,10 @@
   balloonRadius
   imgBullet
   addScore
+  particlesEffect
+  loseLife
+  lives
+  enemies
 */
 
 class Bullet extends GameObject {
@@ -55,6 +59,10 @@ class Bullet extends GameObject {
     this.checkBulletCollision()
 
     this.checkBulletBalloonCollision()
+
+    this.checkBulletPlayerCollision()
+
+    this.checkPlayersBulletEnemyCollision()
   }
 
   checkBulletCollision() {
@@ -124,6 +132,43 @@ class Bullet extends GameObject {
 
           this.removable = true
         }
+      }
+    })
+  }
+
+  checkBulletPlayerCollision() {
+    if (
+      this.didTouch({ sizing: player.sizing, body: player.body }, 'circle') &&
+      this.fromWeapon.owner !== player
+    ) {
+      if (lives === 1) {
+        setTimeout(loseLife, 1000)
+      } else {
+        loseLife()
+      }
+
+      this.removable = true
+
+      particlesEffect(imgBullet[this.type], {
+        x: this.body.position.x,
+        y: this.body.position.y,
+      })
+    }
+  }
+
+  checkPlayersBulletEnemyCollision() {
+    enemies.forEach(enemy => {
+      if (
+        this.didTouch({ sizing: enemy.sizing, body: enemy.body }, 'circle') &&
+        this.fromWeapon.owner === player
+      ) {
+        addScore(
+          100,
+          enemy.settings.image,
+          { x: enemy.body.position.x, y: enemy.body.position.y },
+          Math.floor(random(5, 10)),
+          { floatingText: true }
+        )
       }
     })
   }
