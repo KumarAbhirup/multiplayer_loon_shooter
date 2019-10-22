@@ -33,6 +33,7 @@
   balloonRadius
   collectibles
   users
+  random
 */
 
 class Player extends GameObject {
@@ -225,6 +226,10 @@ class Player extends GameObject {
       }
 
       this.weaponCooldownTimer = weaponCooldown[this.weaponType]
+
+      this.weaponType = Math.floor(random(0, 3))
+      this.weapon.type = this.weaponType
+      this.weapon.settings.image = imgWeapon[this.weaponType]
     }
   }
 }

@@ -29,6 +29,8 @@ class Bullet extends GameObject {
 
   direction = this.fromWeapon.shootDirection
 
+  type = this.fromWeapon.type
+
   owner = this.fromWeapon.owner
 
   rotation = this.fromWeapon.rotation
@@ -92,10 +94,10 @@ class Bullet extends GameObject {
       if (
         this.didTouch({ sizing: balloon.sizing, body: balloon.body }, 'circle')
       ) {
-        if (balloon.settings.type === this.fromWeapon.type) {
+        if (balloon.settings.type === this.type) {
           addScore(
             20,
-            imgBullet[this.fromWeapon.type],
+            imgBullet[this.type],
             { x: balloon.body.position.x, y: balloon.body.position.y },
             Math.floor(random(5, 10)),
             { floatingText: true }
@@ -113,8 +115,8 @@ class Bullet extends GameObject {
               { radius: balloonRadius / 2 },
               {
                 shape: 'circle',
-                image: imgBullet[this.fromWeapon.type],
-                type: this.fromWeapon.type,
+                image: imgBullet[this.type],
+                type: this.type,
                 bullet: this,
               }
             )
