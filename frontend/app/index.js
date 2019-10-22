@@ -541,6 +541,13 @@ function cleanup() {
       bullets.splice(i, 1)
     }
   }
+
+  // Clean Balloons
+  for (let i = 0; i < balloons.length; i++) {
+    if (balloons[i].removable) {
+      balloons.splice(i, 1)
+    }
+  }
 }
 
 // Call this when a lose life event should trigger

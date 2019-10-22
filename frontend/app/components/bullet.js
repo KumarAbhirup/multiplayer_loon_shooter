@@ -21,6 +21,7 @@
   Balloon
   balloonRadius
   imgBullet
+  addScore
 */
 
 class Bullet extends GameObject {
@@ -87,26 +88,39 @@ class Bullet extends GameObject {
   }
 
   checkBulletBalloonCollision() {
-    balloons.forEach((balloon, i) => {
+    balloons.forEach(balloon => {
       if (
         this.didTouch({ sizing: balloon.sizing, body: balloon.body }, 'circle')
       ) {
-        balloons.push(
-          new Balloon(
-            {
-              x: this.body.position.x,
-              y: this.body.position.y,
-            },
-            { radius: balloonRadius / 2 },
-            {
-              shape: 'circle',
-              image: imgBullet[this.fromWeapon.type],
-              type: this.fromWeapon.type,
-            }
+        if (balloon.settings.type === this.fromWeapon.type) {
+          addScore(
+            20,
+            imgBullet[this.fromWeapon.type],
+            { x: balloon.body.position.x, y: balloon.body.position.y },
+            Math.floor(random(5, 10)),
+            { floatingText: true }
           )
-        )
 
-        this.removable = true
+          this.removable = true
+          balloon.removable = true
+        } else {
+          balloons.push(
+            new Balloon(
+              {
+                x: this.body.position.x,
+                y: this.body.position.y,
+              },
+              { radius: balloonRadius / 2 },
+              {
+                shape: 'circle',
+                image: imgBullet[this.fromWeapon.type],
+                type: this.fromWeapon.type,
+              }
+            )
+          )
+
+          this.removable = true
+        }
       }
     })
   }

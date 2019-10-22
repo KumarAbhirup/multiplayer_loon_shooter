@@ -213,6 +213,7 @@ class Player extends GameObject {
             image: imgBullet[this.weaponType],
             weapon: this.weapon,
             owner: this,
+            movable: true,
           }
         )
 
