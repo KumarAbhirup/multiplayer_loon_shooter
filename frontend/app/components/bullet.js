@@ -17,6 +17,10 @@
   random
   bullets
   p5
+  balloons
+  Balloon
+  balloonRadius
+  imgBullet
 */
 
 class Bullet extends GameObject {
@@ -46,6 +50,8 @@ class Bullet extends GameObject {
     }
 
     this.checkBulletCollision()
+
+    this.checkBulletBalloonCollision()
   }
 
   checkBulletCollision() {
@@ -78,5 +84,30 @@ class Bullet extends GameObject {
       this.body.position.y > arenaSize / 2 ||
       this.body.position.y < -arenaSize / 2
     )
+  }
+
+  checkBulletBalloonCollision() {
+    balloons.forEach((balloon, i) => {
+      if (
+        this.didTouch({ sizing: balloon.sizing, body: balloon.body }, 'circle')
+      ) {
+        balloons.push(
+          new Balloon(
+            {
+              x: this.body.position.x,
+              y: this.body.position.y,
+            },
+            { radius: balloonRadius / 2 },
+            {
+              shape: 'circle',
+              image: imgBullet[this.fromWeapon.type],
+              type: this.fromWeapon.type,
+            }
+          )
+        )
+
+        this.removable = true
+      }
+    })
   }
 }

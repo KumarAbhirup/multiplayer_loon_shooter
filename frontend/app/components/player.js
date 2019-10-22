@@ -100,7 +100,7 @@ class Player extends GameObject {
       ) {
         const numOfPlayers = Object.keys(users).length
 
-        if (numOfPlayers > 1) {
+        if (numOfPlayers < 1) {
           // Collect
           collectibles[i].collected = true
           collectibles[i].animTimer = 0
@@ -204,7 +204,7 @@ class Player extends GameObject {
       // Spawn a bullet
       const numOfPlayers = Object.keys(users).length
 
-      if (numOfPlayers > 1) {
+      if (numOfPlayers < 1) {
         const bullet = new Bullet(
           { x: position.x, y: position.y },
           { radius: balloonRadius / 2 },

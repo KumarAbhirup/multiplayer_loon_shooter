@@ -244,6 +244,8 @@ function instantiate() {
     }
   )
 
+  spawnBalloons()
+
   // Instantiate Emojis
   for (let i = 0; i < Koji.config.strings.emojis.length; i++) {
     let emojiSize = objSize * 2
