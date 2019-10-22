@@ -147,6 +147,14 @@ class Bullet extends GameObject {
         loseLife()
       }
 
+      addScore(
+        -100,
+        player.settings.image,
+        { x: player.body.position.x, y: player.body.position.y },
+        Math.floor(random(5, 10)),
+        { floatingText: true }
+      )
+
       this.removable = true
 
       particlesEffect(imgBullet[this.type], {
