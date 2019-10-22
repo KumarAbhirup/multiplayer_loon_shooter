@@ -162,8 +162,6 @@ class Bullet extends GameObject {
         this.didTouch({ sizing: enemy.sizing, body: enemy.body }, 'circle') &&
         this.fromWeapon.owner === player
       ) {
-        this.removable = true
-
         addScore(
           100,
           enemy.settings.image,
@@ -171,6 +169,8 @@ class Bullet extends GameObject {
           Math.floor(random(5, 10)),
           { floatingText: true }
         )
+
+        this.removable = true
       }
     })
   }
