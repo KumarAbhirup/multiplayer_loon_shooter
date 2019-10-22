@@ -52,8 +52,8 @@ class Bullet extends GameObject {
     this.body.position.add(p5.Vector.mult(this.direction, this.sizing.radius))
 
     if (this.isTouchingEdges()) {
-      this.removable = true
       spawnExplosion(this.body.position.x, this.body.position.y, random(2, 10))
+      this.removable = true
     }
 
     this.checkBulletCollision()
@@ -74,15 +74,15 @@ class Bullet extends GameObject {
             'circle'
           )
         ) {
-          this.removable = true
-
-          bullets[i].removable = true
-
           spawnExplosion(
             (this.body.position.x + bullets[i].body.position.x) / 2,
             (this.body.position.y + bullets[i].body.position.y) / 2,
             random(35, 50)
           )
+
+          bullets[i].removable = true
+
+          this.removable = true
         }
       }
     }
@@ -111,8 +111,9 @@ class Bullet extends GameObject {
             { floatingText: true }
           )
 
-          this.removable = true
           balloon.removable = true
+
+          this.removable = true
         } else {
           balloons.push(
             new Balloon(
@@ -150,17 +151,12 @@ class Bullet extends GameObject {
       addScore(
         -100,
         player.settings.image,
-        { x: player.body.position.x, y: player.body.position.y },
+        { x: this.body.position.x, y: this.body.position.y },
         Math.floor(random(5, 10)),
         { floatingText: true }
       )
 
       this.removable = true
-
-      particlesEffect(imgBullet[this.type], {
-        x: this.body.position.x,
-        y: this.body.position.y,
-      })
     }
   }
 
