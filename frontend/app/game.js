@@ -61,6 +61,7 @@ function gamePlay() {
 
   balloons.forEach(balloon => {
     balloon.show()
+    balloon.update()
   })
 
   balloonBorder.show()

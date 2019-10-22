@@ -115,6 +115,7 @@ class Bullet extends GameObject {
                 shape: 'circle',
                 image: imgBullet[this.fromWeapon.type],
                 type: this.fromWeapon.type,
+                bullet: this,
               }
             )
           )
