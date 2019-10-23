@@ -334,12 +334,18 @@ function setup() {
         enemy.lives = payload.lives
         enemy.name = payload.name
         enemy.settings.image = imgPlayer[payload.imageIndex]
+        enemy.weapon = payload.weapon
       }
     })
   })
 
   // Balloons Spawn
   dispatch.on('balloons_spawn', payload => {
+    balloons = payload.balloons
+  })
+
+  // Bullet Spawn
+  dispatch.on('bullet_spawn', payload => {
     balloons = payload.balloons
   })
 
@@ -439,6 +445,7 @@ function manageData() {
       posX: Math.floor(player.body.position.x),
       posY: Math.floor(player.body.position.y),
       imageIndex: imgPlayerIndex,
+      weapon: player.weapon,
       score,
       lives,
     })
