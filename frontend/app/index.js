@@ -334,7 +334,12 @@ function setup() {
         enemy.lives = payload.lives
         enemy.name = payload.name
         enemy.settings.image = imgPlayer[payload.imageIndex]
-        enemy.weapon = payload.weapon
+        enemy.weapon.settings.image = payload.weaponImage
+        enemy.weapon.body.angle = payload.weaponAngle
+        enemy.weapon.body.position.x = payload.weaponPosX
+        enemy.weapon.body.position.y = payload.weaponPosY
+        enemy.weapon.type = payload.weaponType
+        enemy.weaponType = payload.weaponType
       }
     })
   })
@@ -445,7 +450,11 @@ function manageData() {
       posX: Math.floor(player.body.position.x),
       posY: Math.floor(player.body.position.y),
       imageIndex: imgPlayerIndex,
-      weapon: player.weapon,
+      weaponImage: player.weapon.settings.image,
+      weaponAngle: player.weapon.body.angle,
+      weaponPosX: player.weapon.body.position.x,
+      weaponPosY: player.weapon.body.position.y,
+      weaponType: player.weaponType,
       score,
       lives,
     })
