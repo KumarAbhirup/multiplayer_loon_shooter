@@ -36,14 +36,11 @@ class Weapon extends GameObject {
   }
 
   rotateInPlayer() {
-    if (isMobile || usingKeyboard) {
-      //
-    } else {
-      this.shootDirection = createVector(
-        camera.mouseX - this.owner.body.position.x,
-        camera.mouseY - this.owner.body.position.y
-      ).normalize()
-    }
+    // Player won't be able to shoot properly in mobile.
+    this.shootDirection = createVector(
+      camera.mouseX - this.owner.body.position.x,
+      camera.mouseY - this.owner.body.position.y
+    ).normalize()
 
     let angleDir = this.shootDirection.heading()
 
