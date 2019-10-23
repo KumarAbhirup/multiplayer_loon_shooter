@@ -115,6 +115,7 @@ function spawnEnemy(userId, playerName) {
       id: userId,
       playerName: playerName || 'Player',
       movable: true,
+      weaponType: Math.floor(random(0, 3)),
     }
   )
 
